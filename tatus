@@ -1,0 +1,69 @@
+[33mcommit cb76e1baa8425f58cf06c3a0592ff0b6c9d674de[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/fragments[m[33m)[m
+Author: Daniel Itkes <danielitkes@gmail.com>
+Date:   Tue May 17 10:42:13 2022 +0300
+
+    Added All Fragments and made Nav Graph
+
+[33mcommit b2ba5fdb672dfb5bf54a14b2d51969491d8ef11f[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 9b90ca1 3a4b16f
+Author: alonmiron <105659739+alonmiron@users.noreply.github.com>
+Date:   Mon May 16 22:14:19 2022 +0300
+
+    Merge pull request #4 from OmerGeva/navigation_bar
+    
+    added basic navigation bar to the main activity
+
+[33mcommit 3a4b16f8c6b1a588790ffbeaff3efdb5cd9b27ff[m[33m ([m[1;31morigin/navigation_bar[m[33m)[m
+Merge: 99074b6 9b90ca1
+Author: Alon Miron <alon.miron@post.idc.ac.il>
+Date:   Mon May 16 22:12:11 2022 +0300
+
+    removed .idea grom tracking
+
+[33mcommit 99074b69da387f90ca9d70924ad7c8a79b5528be[m
+Author: Alon Miron <alon.miron@post.idc.ac.il>
+Date:   Mon May 16 21:31:44 2022 +0300
+
+    added basic navigation bar to the main activity
+
+[33mcommit 9b90ca14b204cd56c57e9a2e46108b433cd7930f[m
+Merge: 6efa4dd f744f4a
+Author: Omer Geva <54701359+OmerGeva@users.noreply.github.com>
+Date:   Mon May 16 19:33:22 2022 +0300
+
+    Merge pull request #3 from OmerGeva/new-text
+    
+    added new text: test
+
+[33mcommit f744f4a45aa0bc4047be91014b42280a9f592191[m
+Author: Omer Geva <ogeva97@gmail.com>
+Date:   Mon May 16 19:29:45 2022 +0300
+
+    added new text: test
+
+[33mcommit 6efa4dd1f353a29cf9ea2bf3bb14277a39fc0445[m
+Merge: 00f5b3e d08fd9a
+Author: Daniel Itkes <89524327+DanielItkes@users.noreply.github.com>
+Date:   Mon May 16 18:41:35 2022 +0300
+
+    Merge pull request #1 from OmerGeva/test
+    
+    Changed the welcome screen
+
+[33mcommit d08fd9a87b4df15756d8e7e436d52fcf69fbc124[m
+Author: Daniel Itkes <danielitkes@gmail.com>
+Date:   Mon May 16 18:38:03 2022 +0300
+
+    Changed the welcome screen
+
+[33mcommit 00f5b3e2cf3905927d9e0fd966132356dcbc8d48[m
+Author: Omer Geva <ogeva97@gmail.com>
+Date:   Mon May 16 18:20:55 2022 +0300
+
+    android studio config
+
+[33mcommit d252be9efd4fcb819d533233682ccf7d36641c5b[m
+Author: Omer Geva <ogeva97@gmail.com>
+Date:   Mon May 16 18:18:53 2022 +0300
+
+    first
