@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<!--All images are place holders, we need to decide on transparent icons-->
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/icon_home"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_listings"
+        android:icon="@drawable/icon_menu"
+        android:title="@string/title_listings" />
+
+    <item
+        android:id="@+id/navigation_favorites"
+        android:icon="@drawable/icon_favorites"
+        android:title="@string/title_favorites" />
+
+</menu>

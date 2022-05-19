@@ -1,19 +1,15 @@
 package com.example.subget
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import com.example.subget.databinding.ActivityMainBinding
-import com.example.subget.favorites.FavoritesFragment
-import com.example.subget.home.HomeFragment
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,21 +22,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
 
-        binding.homeBtn.setOnClickListener {
-            replaceFragment(HomeFragment())
-        }
-        binding.favoritesBtn.setOnClickListener {
-            replaceFragment(FavoritesFragment())
-        }
-        binding.uploadBtn.setOnClickListener {
-            //TODO: navigate the button to the desired location
-        }
 
-    }
-    private fun replaceFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.nav_host_fragment, fragment)
-        transaction.commit()
-    }
+        // Bottom Navigation Bar
+        val navView: BottomNavigationView = binding.navView
 
+        val navController = findNavController(R.id.nav_host_fragment)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_listings, R.id.navigation_favorites
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+    }
 }
