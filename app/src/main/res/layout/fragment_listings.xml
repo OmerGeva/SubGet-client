@@ -7,9 +7,17 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/listings_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Listings Fragment"
         android:textSize="30dp"/>
+    <TextView
+        android:id="@+id/txtId"
+        android:textFontWeight="@integer/material_motion_duration_medium_1"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"/>
 
 </FrameLayout>
