@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.subget.ApiInterface
 import com.example.subget.MyDataItem
-import com.example.subget.R
-import com.example.subget.databinding.FragmentDetailsBinding
 import com.example.subget.databinding.FragmentListingsBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,7 +31,8 @@ class ListingsFragment : Fragment() {
     ): View? {
 
         _binding = FragmentListingsBinding.inflate(inflater, container, false)
-        getMyData();
+        binding.listingRecycler.layoutManager = LinearLayoutManager(requireContext())
+        getMyData()
 
         return binding.root
     }
@@ -53,24 +54,41 @@ class ListingsFragment : Fragment() {
                 val responseBody = response.body()!!
 
                 val myStringBuilder = StringBuilder()
-                for(myData in responseBody) {
-                    myStringBuilder.append("-")
-                    myStringBuilder.append(myData.title)
-                    myStringBuilder.append("\n")
-                    myStringBuilder.append(myData.description)
-                    myStringBuilder.append("\n")
-                    val price = myData.price
-                    myStringBuilder.append("$$price")
-
-                    myStringBuilder.append("\n--------------------------------------------------------\n")
+                //TODO: Omer if you don't mind i think we can delete the following gray marked area...
+//                for(myData in responseBody) {
+//                    myStringBuilder.append("-")
+//                    myStringBuilder.append(myData.title)
+//                    myStringBuilder.append("\n")
+//                    myStringBuilder.append(myData.description)
+//                    myStringBuilder.append("\n")
+//                    val price = myData.price
+//                    myStringBuilder.append("$$price")
+//
+//                    myStringBuilder.append("\n--------------------------------------------------------\n")
+//                }
+//                val txtId = binding.txtId
+//                txtId.text = myStringBuilder
+                val Datalist : MutableList<MyDataItem> = ArrayList()
+                for(listing in responseBody) {
+                    val dataItem = MyDataItem(listing.id, listing.title, listing.description, listing.address, listing.phone_number, listing.image, listing.washing_machine, listing.pet_allowed, listing.price)
+                    Datalist.add(dataItem)
                 }
-                val txtId = binding.txtId
-                txtId.text = myStringBuilder
+                binding.listingRecycler.adapter = ListingAdapter(Datalist,this@ListingsFragment)
             }
 
             override fun onFailure(call: Call<List<MyDataItem>?>, t: Throwable) {
                 Log.d("MainActivity", "onFailure: "+t.message)
             }
         })
+    }
+
+    fun onItemClicked(adapterPosition: Int) {
+        //TODO: create the function for the onClick
+        Toast.makeText(context, "fuck1", Toast.LENGTH_SHORT).show()
+    }
+
+    fun onItemLongClick(adapterPosition: Int) {
+        //TODO: create the function for the onLongClick
+        Toast.makeText(context, "fuck2", Toast.LENGTH_SHORT).show()
     }
 }
