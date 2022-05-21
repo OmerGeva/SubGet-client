@@ -53,21 +53,6 @@ class ListingsFragment : Fragment() {
             ) {
                 val responseBody = response.body()!!
 
-                val myStringBuilder = StringBuilder()
-                //TODO: Omer if you don't mind i think we can delete the following gray marked area...
-//                for(myData in responseBody) {
-//                    myStringBuilder.append("-")
-//                    myStringBuilder.append(myData.title)
-//                    myStringBuilder.append("\n")
-//                    myStringBuilder.append(myData.description)
-//                    myStringBuilder.append("\n")
-//                    val price = myData.price
-//                    myStringBuilder.append("$$price")
-//
-//                    myStringBuilder.append("\n--------------------------------------------------------\n")
-//                }
-//                val txtId = binding.txtId
-//                txtId.text = myStringBuilder
                 val Datalist : MutableList<MyDataItem> = ArrayList()
                 for(listing in responseBody) {
                     val dataItem = MyDataItem(listing.id, listing.title, listing.description, listing.address, listing.phone_number, listing.image, listing.washing_machine, listing.pet_allowed, listing.price)
