@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_listings, R.id.navigation_favorites
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
         navView.setupWithNavController(navController)
 
 //        binding.detailBtn.setOnClickListener {
