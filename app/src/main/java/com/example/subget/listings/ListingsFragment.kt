@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.subget.ApiInterface
 import com.example.subget.MyDataItem
 import com.example.subget.databinding.FragmentListingsBinding
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://subget.herokuapp.com/"
 
+@AndroidEntryPoint
 class ListingsFragment : Fragment() {
 
     private var _binding: FragmentListingsBinding? = null
