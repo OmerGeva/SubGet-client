@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [Listing::class], version = 1, exportSchema = false)
 abstract class ListingDatabase : RoomDatabase() {
 
-    abstract val listingDatabaseDao: ListingDatabaseDAO
+    abstract fun ListingDatabaseDao(): ListingDatabaseDAO
 
     // Read about the companion object
     // https://developer.android.com/codelabs/kotlin-android-training-room-database?index=..%2F..android-kotlin-fundamentals#5

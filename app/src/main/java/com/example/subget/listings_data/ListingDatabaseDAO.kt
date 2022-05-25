@@ -22,6 +22,6 @@ interface ListingDatabaseDAO {
 
     // Get all Listings
     @Query("SELECT * FROM listings_table ORDER BY listingId DESC")
-    fun getAllNights(): LiveData<List<Listing>>
+    fun getAllListings(): LiveData<List<Listing>>
 
 }
