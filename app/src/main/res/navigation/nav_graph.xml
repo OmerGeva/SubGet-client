@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.subget.home.HomeFragment"
+        android:name="com.example.subget.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
     </fragment>
     <fragment
         android:id="@+id/navigation_listings"
-        android:name="com.example.subget.listings.ListingsFragment"
+        android:name="com.example.subget.ui.listings.ListingsFragment"
         android:label="@string/title_listings"
         tools:layout="@layout/fragment_listings" >
     </fragment>
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="com.example.subget.favorites.FavoritesFragment"
+        android:name="com.example.subget.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" >
     </fragment>
@@ -27,7 +27,7 @@
 <!--Once we have a clickable listing we will implement the navigation to Listing Details-->
     <fragment
         android:id="@+id/navigation_details"
-        android:name="com.example.subget.listing_detail.DetailsFragment"
+        android:name="com.example.subget.ui.listing_detail.DetailsFragment"
         android:label="@string/title_details"
         tools:layout="@layout/fragment_details" >
     </fragment>

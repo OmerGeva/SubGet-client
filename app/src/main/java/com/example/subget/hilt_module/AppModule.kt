@@ -1,7 +1,7 @@
-package com.example.subget.module
+package com.example.subget.hilt_module
 
 import android.content.Context
-import com.example.subget.listings_data.ListingDatabase
+import com.example.subget.app_data.local_db.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +16,11 @@ object AppModule {
     // Will provide the database to the Database interface constructor below
     @Provides
     @Singleton
-    fun provideLocalDataBase(@ApplicationContext appContext : Context) : ListingDatabase =
-        ListingDatabase.getInstance(appContext)
+    fun provideLocalDataBase(@ApplicationContext appContext : Context) : AppDatabase =
+        AppDatabase.getInstance(appContext)
 
     // Will provide the database interface to our future repository's constructor
     @Provides
     @Singleton
-    fun provideDatabaseDao(database: ListingDatabase) = database.ListingDatabaseDao()
+    fun provideDatabaseDao(database: AppDatabase) = database.appDatabaseDao()
 }
