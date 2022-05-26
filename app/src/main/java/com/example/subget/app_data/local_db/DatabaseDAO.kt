@@ -9,7 +9,7 @@ import com.example.subget.app_data.models.Listing
 interface DatabaseDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(listing: Listing)
+    fun insert(listings: List<Listing>)
 
     // Finds a Listing by its id
     @Query("SELECT * from listings WHERE id = :id")
@@ -17,6 +17,6 @@ interface DatabaseDAO {
 
     // Get all Listings
     @Query("SELECT * FROM listings ORDER BY id DESC")
-    fun getAllListings(): LiveData<List<Listing>>
+    fun localGetListings(): LiveData<List<Listing>>
 
 }

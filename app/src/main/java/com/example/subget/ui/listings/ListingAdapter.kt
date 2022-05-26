@@ -8,7 +8,15 @@ import com.bumptech.glide.Glide
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.CardLayoutBinding
 
-class ListingAdapter(private val listings: MutableList<Listing>, private val callback: ListingsFragment) : RecyclerView.Adapter<ListingAdapter.ListingViewHolder>() {
+class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adapter<ListingAdapter.ListingViewHolder>() {
+
+    private val listings = ArrayList<Listing>()
+
+    fun setListings(listings : Collection<Listing>) {
+        this.listings.clear()
+        this.listings.addAll(listings)
+        notifyDataSetChanged()
+    }
 
     interface ListingListener {
         fun onItemClicked(index: Int)
