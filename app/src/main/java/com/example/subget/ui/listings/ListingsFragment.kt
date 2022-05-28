@@ -37,7 +37,7 @@ class ListingsFragment : Fragment() {
 
         _binding = FragmentListingsBinding.inflate(inflater, container, false)
         binding.listingRecycler.layoutManager = LinearLayoutManager(requireContext())
-//        fetchData()
+        fetchData()
 
         return binding.root
     }
@@ -72,29 +72,28 @@ class ListingsFragment : Fragment() {
 //        })
 //    }
 
-//    fun fetchData() {
-//
-//        adapter = ListingAdapter(this@ListingsFragment)
-//        binding.listingRecycler.adapter = adapter
-//
-//        viewModel.listings.observe(viewLifecycleOwner) {
-//            when (it.status) {
-//                is Loading -> Toast.makeText(requireContext(), "PLACE HOLDER", Toast.LENGTH_LONG)
-//                    .show()
-//
-//                is Success -> {
-//                    adapter.setListings(it.status.data!!)
-//                }
-//
-//                is Error -> {
-//
-//                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_LONG).show()
-//                }
-//            }
-//
-//
-//        }
-//    }
+    fun fetchData() {
+
+        adapter = ListingAdapter(this@ListingsFragment)
+        binding.listingRecycler.adapter = adapter
+
+        viewModel.listings.observe(viewLifecycleOwner) {
+            when (it.status) {
+                is Loading -> Toast.makeText(requireContext(), "PLACE HOLDER", Toast.LENGTH_LONG)
+                    .show()
+
+                is Success -> {
+                    adapter.setListings(it.status.data!!)
+                }
+
+                is Error -> {
+                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_LONG).show()
+                }
+            }
+
+
+        }
+    }
 
     fun onItemClicked(adapterPosition: Int) {
         //TODO: create the function for the onClick

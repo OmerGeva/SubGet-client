@@ -15,7 +15,7 @@ class Repository @Inject constructor(
     fun repoGetListings() = performFetchingAndSaving(
         {localDataSource.localGetListings()},
         {remoteDataSource.remoteGetListings()},
-        {localDataSource.insert(it.results)}
+        {localDataSource.insert(it.listings)}
     )
 
 }
