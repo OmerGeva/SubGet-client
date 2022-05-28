@@ -13,9 +13,18 @@ data class Listing(
     val description: String,
     val address: String,
     val phone_number: String,
+    val contact_name: String,
     val image: String,
     val washing_machine: Boolean,
     val pet_allowed: Boolean,
-    val price: Int
+    val near_beach: Boolean,
+    val wifi: Boolean,
+    val bedrooms: Int,
+    val bathrooms: Int,
+    val floor: Int,
+    val price: Int,
+
+    @ColumnInfo(defaultValue = "1")
+    val favorite: Int
 
     )
