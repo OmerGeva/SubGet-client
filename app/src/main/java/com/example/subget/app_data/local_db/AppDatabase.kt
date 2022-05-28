@@ -1,23 +1,24 @@
-package com.example.subget.listings_data
+package com.example.subget.app_data.local_db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.subget.app_data.models.Listing
 
 @Database(entities = [Listing::class], version = 1, exportSchema = false)
-abstract class ListingDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun ListingDatabaseDao(): ListingDatabaseDAO
+    abstract fun appDatabaseDao(): DatabaseDAO
 
     // Read about the companion object
     // https://developer.android.com/codelabs/kotlin-android-training-room-database?index=..%2F..android-kotlin-fundamentals#5
     companion object {
 
         @Volatile
-        private var INSTANCE: ListingDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): ListingDatabase {
+        fun getInstance(context: Context): AppDatabase {
 
             synchronized(this) {
                 var instance = INSTANCE
@@ -25,7 +26,7 @@ abstract class ListingDatabase : RoomDatabase() {
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        ListingDatabase::class.java,
+                        AppDatabase::class.java,
                         "listings_database"
                     )
                         .fallbackToDestructiveMigration()

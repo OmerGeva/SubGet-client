@@ -1,4 +1,4 @@
-package com.example.subget
+package com.example.subget.ui
 
 
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.subget.databinding.ActivityMainBinding
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.subget.favorites.FavoritesFragment
+import com.example.subget.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 

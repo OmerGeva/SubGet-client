@@ -1,18 +1,19 @@
-package com.example.subget.favorites
+package com.example.subget.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.subget.R
-import com.example.subget.databinding.FragmentFavoritesBinding
+import com.example.subget.databinding.FragmentDetailsBinding
 import com.example.subget.databinding.FragmentHomeBinding
 
 
-class FavoritesFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private var _binding: FragmentFavoritesBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
 
@@ -21,7 +22,7 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         return binding.root
     }

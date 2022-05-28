@@ -1,6 +1,13 @@
-package com.example.subget
+package com.example.subget.app_data.models
 
-data class MyDataItem(
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "listings")
+data class Listing(
+
+    @PrimaryKey
     val id: Int,
     val title: String,
     val description: String,
@@ -10,4 +17,5 @@ data class MyDataItem(
     val washing_machine: Boolean,
     val pet_allowed: Boolean,
     val price: Int
-)
+
+    )

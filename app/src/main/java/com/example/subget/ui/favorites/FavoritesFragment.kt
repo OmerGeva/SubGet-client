@@ -1,18 +1,16 @@
-package com.example.subget.listing_detail
+package com.example.subget.ui.favorites
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.subget.R
-import com.example.subget.databinding.FragmentDetailsBinding
 import com.example.subget.databinding.FragmentFavoritesBinding
 
 
-class DetailsFragment : Fragment() {
+class FavoritesFragment : Fragment() {
 
-    private var _binding: FragmentDetailsBinding? = null
+    private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
 
 
@@ -21,7 +19,7 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
 
         return binding.root
     }
