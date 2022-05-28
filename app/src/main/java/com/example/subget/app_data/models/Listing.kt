@@ -23,8 +23,6 @@ data class Listing(
     val bathrooms: Int,
     val floor: Int,
     val price: Int,
-
-    @ColumnInfo(defaultValue = "1")
+ 
     val favorite: Int
-
     )
