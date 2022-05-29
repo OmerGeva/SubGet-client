@@ -18,4 +18,10 @@ class Repository @Inject constructor(
         {localDataSource.insert(it.listings)}
     )
 
+    fun getSingleListing(id : Int) = performFetchingAndSaving(
+        {localDataSource.getListing(id)},
+        {remoteDataSource.remoteGetSingleListing(id)},
+        {localDataSource.insertSingleListing(it)}
+    )
+
 }

@@ -8,5 +8,6 @@ class RemoteDataSource @Inject constructor(
     private val listingService: ListingService) : BaseDataSource() {
 
     suspend fun remoteGetListings() = getResult { listingService.getAllListings() }
+    suspend fun remoteGetSingleListing(id : Int) = getResult { listingService.getListing(id) }
 
 }

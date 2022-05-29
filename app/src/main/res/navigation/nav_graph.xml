@@ -16,6 +16,9 @@
         android:name="com.example.subget.ui.listings.ListingsFragment"
         android:label="@string/title_listings"
         tools:layout="@layout/fragment_listings" >
+    <action
+        android:id="@+id/action_allListings_to_detailedListing"
+        app:destination="@id/navigation_details"/>
     </fragment>
     <fragment
         android:id="@+id/navigation_favorites"
