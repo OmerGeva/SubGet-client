@@ -5,24 +5,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.listing_detail.DetailsFragment"
     android:background="@color/white">
+    <ImageView
+        android:id="@+id/detailedImage"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_marginTop="270dp"
         android:layout_height="wrap_content">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="20dp"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/detailedImage"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:orientation="vertical">
+
 
                 <TextView
                     android:id="@+id/detailedTitle"
@@ -30,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:text="Title"
+                    android:fontFamily="@font/roboto_heavy"
                     android:textSize="30sp"
                     android:textColor="@color/black"/>
                 <LinearLayout
@@ -43,14 +50,14 @@
                         android:orientation="vertical"
                         android:paddingEnd="10dp"
                         android:layout_weight="1">
+
                         <TextView
                             android:id="@+id/detailedAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
                             android:text="Address"
-                            android:textSize="20sp"
-                            android:textColor="@color/black"/>
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -63,7 +70,6 @@
                             android:id="@+id/detailedPrice"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
                             android:text="Price"
                             android:textSize="30sp"
                             android:textColor="@color/black"/>
@@ -84,21 +90,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/bedIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="50dp"
+                            android:padding="4dp"
+                            android:src="@drawable/bed" />
+
                         <TextView
                             android:id="@+id/detailedNumOfRooms"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:text="Number Of Rooms"
-                            android:textSize="20sp"
-                            android:textColor="@color/black"/>
+                            android:text="Rooms Number"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -119,6 +137,7 @@
                             <ImageView
                                 android:layout_width="45dp"
                                 android:layout_height="50dp"
+                                android:padding="4dp"
                                 android:layout_gravity="end"
                                 android:id="@+id/icon1"/>
                         </LinearLayout>
@@ -129,6 +148,7 @@
                             >
                             <ImageView
                                 android:layout_width="45dp"
+                                android:padding="4dp"
                                 android:layout_height="50dp"
                                 android:id="@+id/icon2"/>
                         </LinearLayout>
@@ -139,6 +159,7 @@
                             >
                             <ImageView
                                 android:layout_width="45dp"
+                                android:padding="4dp"
                                 android:layout_height="50dp"
                                 android:id="@+id/icon3"/>
                         </LinearLayout>
@@ -149,6 +170,7 @@
                             >
                             <ImageView
                                 android:layout_width="45dp"
+                                android:padding="4dp"
                                 android:layout_height="50dp"
                                 android:id="@+id/icon4"/>
                         </LinearLayout>
@@ -182,7 +204,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:paddingHorizontal="10dp"
-                    android:text="Description"
+                    android:padding="8dp"
+                    android:text="About the flat"
                     android:textSize="30dp"/>
                 <TextView
                     android:id="@+id/detailedDescription"
@@ -191,7 +214,7 @@
                     android:textColor="@color/black"
                     android:padding="10dp"
                     android:text="That is my description"
-                    android:textSize="22dp"/>
+                    android:textSize="18dp"/>
 
 
             </LinearLayout>
@@ -202,6 +225,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/detailedContactName"
@@ -209,15 +233,30 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Contact"
-                    android:textSize="20dp"/>
-                <TextView
-                    android:id="@+id/detailedPhone"
+                    android:paddingLeft="8dp"
+                    android:textSize="24dp"/>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:paddingVertical="10dp"
-                    android:text="Phone number goes here"
-                    android:textSize="15dp"/>
+                    android:padding="8dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:padding="4dp"
+                        android:src="@drawable/phone"
+                        android:layout_height="50dp"
+                        android:id="@+id/phone"/>
+
+                    <TextView
+                        android:id="@+id/detailedPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="10dp"
+                        android:text="Phone number goes here"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
 
 
             </LinearLayout>

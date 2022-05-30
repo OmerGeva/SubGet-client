@@ -97,7 +97,6 @@ class ListingsFragment : Fragment() {
     }
 
     fun onItemLongClick(adapterPosition: Int) {
-        //TODO: create the function for the onLongClick
         print(false)
     }
 }
