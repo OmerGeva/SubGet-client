@@ -43,12 +43,15 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
         RecyclerView.ViewHolder(binding.root),
         View.OnClickListener, View.OnLongClickListener {
 
+        private lateinit var listing: Listing
+
         init {
             binding.root.setOnClickListener(this)
             binding.root.setOnLongClickListener(this)
         }
 
         fun bind(listing: Listing) {
+            this.listing = listing
             Glide.with(callback).load(listing.image).into(binding.cardImage)
             binding.cardTitle.text = listing.title
             binding.cardAddress.text = listing.address
@@ -56,13 +59,14 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
         }
 
         override fun onClick(v: View?) {
-            callback.onItemClicked(adapterPosition)
+            callback.onItemClicked(listing.id)
         }
 
         override fun onLongClick(v: View?): Boolean {
             callback.onItemLongClick(adapterPosition)
             return true
         }
+
 
 
     }

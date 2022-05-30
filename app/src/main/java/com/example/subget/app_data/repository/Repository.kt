@@ -19,9 +19,12 @@ class Repository @Inject constructor(
         {remoteDataSource.remoteGetListings()},
         {localDataSource.insert(it.listings)}
     )
-
     fun repoGetFavorites() : LiveData<List<Listing>> {
         return localDataSource.localGetFavorites()
     }
-
+    fun getSingleListing(id : Int) = performFetchingAndSaving(
+        {localDataSource.getListing(id)},
+        {remoteDataSource.remoteGetSingleListing(id)},
+        {localDataSource.insertSingleListing(it)}
+    )
 }

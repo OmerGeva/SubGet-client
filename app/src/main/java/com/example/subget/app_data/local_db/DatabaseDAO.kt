@@ -11,9 +11,12 @@ interface DatabaseDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(listings: List<Listing>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSingleListing(listing: Listing)
+
     // Finds a Listing by its id
     @Query("SELECT * from listings WHERE id = :id")
-    fun getListing(id: Int): Listing?
+    fun getListing(id: Int): LiveData<Listing>
 
     @Query("SELECT * from listings WHERE title = :title")
     fun getListingByTitle(title: String): Listing?

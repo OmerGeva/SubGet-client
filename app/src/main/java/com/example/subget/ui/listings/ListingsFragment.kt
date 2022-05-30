@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.subget.R
 import com.example.subget.databinding.FragmentListingsBinding
 import com.example.subget.utils.Error
 import com.example.subget.utils.Loading
@@ -89,9 +92,11 @@ class ListingsFragment : Fragment() {
         }
     }
 
-    fun onItemClicked(adapterPosition: Int) {
+    fun onItemClicked(listingID : Int) {
         //TODO: create the function for the onClick
         Toast.makeText(context, "fuck1", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_allListings_to_detailedListing,
+            bundleOf("id" to listingID))
     }
 
     fun onItemLongClick(adapterPosition: Int) {
