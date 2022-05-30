@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.CardLayoutBinding
+import com.example.subget.ui.favorites.FavoritesFragment
 
 class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adapter<ListingAdapter.ListingViewHolder>() {
 

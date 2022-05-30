@@ -1,6 +1,8 @@
 package com.example.subget.app_data.repository
 
+import androidx.lifecycle.LiveData
 import com.example.subget.app_data.local_db.DatabaseDAO
+import com.example.subget.app_data.models.Listing
 import com.example.subget.app_data.remote_db.RemoteDataSource
 import com.example.subget.utils.performFetchingAndSaving
 import javax.inject.Inject
@@ -17,11 +19,12 @@ class Repository @Inject constructor(
         {remoteDataSource.remoteGetListings()},
         {localDataSource.insert(it.listings)}
     )
-
+    fun repoGetFavorites() : LiveData<List<Listing>> {
+        return localDataSource.localGetFavorites()
+    }
     fun getSingleListing(id : Int) = performFetchingAndSaving(
         {localDataSource.getListing(id)},
         {remoteDataSource.remoteGetSingleListing(id)},
         {localDataSource.insertSingleListing(it)}
     )
-
 }

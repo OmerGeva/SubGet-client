@@ -22,6 +22,7 @@ data class Listing(
     val bedrooms: Int,
     val bathrooms: Int,
     val floor: Int,
-    val price: Int
-
+    val price: Int,
+ 
+    val favorite: Int
     )
