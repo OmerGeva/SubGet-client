@@ -36,8 +36,7 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.listing.observe(viewLifecycleOwner) {
             when(it.status) {
-                is Loading -> Toast.makeText(requireContext(), "Loading...", Toast.LENGTH_LONG)
-                    .show()
+                is Loading -> print('a')
 
                 is Success -> {
                     setListing(it.status.data!!)
@@ -61,8 +60,8 @@ class DetailsFragment : Fragment() {
         binding.detailedNumOfRooms.text = listing.bedrooms.toString()
         binding.detailedPhone.text = listing.phone_number
         binding.detailedContactName.text = listing.contact_name
-        binding.detailedPrice.text = listing.price.toString() + "$"
-        Glide.with(requireContext()).load(listing.image).circleCrop().into(binding.detailedImage)
+        binding.detailedPrice.text = "$" + listing.price.toString()
+        Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
 //        Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
         setIcons(listing)
 
@@ -72,6 +71,7 @@ class DetailsFragment : Fragment() {
 
     private fun setIcons(listing: Listing) {
         val icons = "icon1"
+
         if(listing.washing_machine) {
             binding.icon1.setImageDrawable(resources.getDrawable(R.drawable.washing_machine))
         }

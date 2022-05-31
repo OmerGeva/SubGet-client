@@ -55,7 +55,7 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
             Glide.with(callback).load(listing.image).into(binding.cardImage)
             binding.cardTitle.text = listing.title
             binding.cardAddress.text = listing.address
-            binding.cardPrice.text = listing.price.toString() + " $"
+            binding.cardPrice.text = "$" + listing.price.toString()
         }
 
         override fun onClick(v: View?) {

@@ -76,15 +76,14 @@ class ListingsFragment : Fragment() {
 
         viewModel.listings.observe(viewLifecycleOwner) {
             when (it.status) {
-                is Loading -> Toast.makeText(requireContext(), "PLACE HOLDER", Toast.LENGTH_LONG)
-                    .show()
+                is Loading -> print("loading")
 
                 is Success -> {
                     adapter.setListings(it.status.data!!)
                 }
 
                 is Error -> {
-                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_LONG).show()
+                    print(false)
                 }
             }
 
@@ -93,14 +92,11 @@ class ListingsFragment : Fragment() {
     }
 
     fun onItemClicked(listingID : Int) {
-        //TODO: create the function for the onClick
-        Toast.makeText(context, "fuck1", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.action_allListings_to_detailedListing,
             bundleOf("id" to listingID))
     }
 
     fun onItemLongClick(adapterPosition: Int) {
-        //TODO: create the function for the onLongClick
-        Toast.makeText(context, "fuck2", Toast.LENGTH_SHORT).show()
+        print(false)
     }
 }

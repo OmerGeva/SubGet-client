@@ -51,7 +51,7 @@ class FavoritesFragment : Fragment() {
     }
 
     fun onListingClick(id: Int) {
-        Toast.makeText(context, "fuck2", Toast.LENGTH_SHORT).show()
+        print(false)
     }
 
 
