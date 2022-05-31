@@ -14,7 +14,10 @@
         android:padding="8dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_corners">
+        android:background="@color/white"
+        >
+<!--        android:background="@drawable/rounded_corners"-->
+<!--        >-->
 
 
         <LinearLayout
