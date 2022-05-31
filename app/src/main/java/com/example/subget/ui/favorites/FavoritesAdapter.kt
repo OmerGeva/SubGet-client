@@ -58,7 +58,7 @@ class FavoritesAdapter(private val listener : FavoritesFragment) :
 
     override fun getItemCount() = favorites.size
 
-    interface CharacterItemListener {
-        fun onCharacterClick(characterId : Int)
+    interface ListingListener {
+        fun onListingClick(listingID : Int)
     }
 }

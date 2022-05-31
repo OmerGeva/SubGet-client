@@ -8,26 +8,19 @@ import com.example.subget.app_data.models.Listing
 @Dao
 interface DatabaseDAO {
 
+    // Inserts a list of Listings into Room
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(listings: List<Listing>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSingleListing(listing: Listing)
+    // Get all Listings from Room
+    @Query("SELECT * FROM listings")
+    fun localGetAllListings(): LiveData<List<Listing>>
 
-    // Finds a Listing by its id
+    // Get a single Listing from Room
     @Query("SELECT * from listings WHERE id = :id")
-    fun getListing(id: Int): LiveData<Listing>
+    fun localGetSingleListing(id: Int): LiveData<Listing>
 
-    @Query("SELECT * from listings WHERE title = :title")
-    fun getListingByTitle(title: String): Listing?
-
-    // Get all Listings
-    @Query("SELECT * FROM listings ORDER BY id DESC")
-    fun localGetListings(): LiveData<List<Listing>>
-
-    @Query("SELECT COUNT(*) FROM listings")
-    fun checkIfEmpty(): Int
-
+    // Get all Listings which are classified as favorites from Room
     @Query("SELECT * FROM listings WHERE favorite = 0")
     fun localGetFavorites(): LiveData<List<Listing>>
 

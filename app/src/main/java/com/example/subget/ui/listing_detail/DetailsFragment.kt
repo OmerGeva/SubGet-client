@@ -28,29 +28,14 @@ class DetailsFragment : Fragment() {
     ): View? {
 
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.listing.observe(viewLifecycleOwner) {
-            when(it.status) {
-                is Loading -> print('a')
 
-                is Success -> {
-                    setListing(it.status.data!!)
-                }
-                is Error -> {
-                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_LONG).show()
-                }
-
-            }
-        }
-
-        arguments?.getInt("id")?.let {
-            viewModel.setId(it)
-        }
+        arguments?.getInt("id")?.let { viewModel.setId(it) }
+        viewModel.listing.observe(viewLifecycleOwner) { setListing(it) }
     }
 
     private fun setListing(listing: Listing) {
@@ -62,11 +47,7 @@ class DetailsFragment : Fragment() {
         binding.detailedContactName.text = listing.contact_name
         binding.detailedPrice.text = "$" + listing.price.toString()
         Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
-//        Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
         setIcons(listing)
-
-
-
     }
 
     private fun setIcons(listing: Listing) {

@@ -8,10 +8,8 @@ import retrofit2.http.Path
 
 interface ListingService {
 
+    // Request all listings from API
     @GET("listings")
-    suspend fun getAllListings() : Response<AllListings>
-
-    @GET("listing/{id}")
-    suspend fun getListing(@Path("id") id : Int) : Response<Listing>
+    suspend fun apiGetAllListings() : Response<AllListings>
 
 }

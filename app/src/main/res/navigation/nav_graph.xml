@@ -25,9 +25,10 @@
         android:name="com.example.subget.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favorites_to_detailedListing"
+            app:destination="@id/navigation_details"/>
     </fragment>
-
-<!--Once we have a clickable listing we will implement the navigation to Listing Details-->
     <fragment
         android:id="@+id/navigation_details"
         android:name="com.example.subget.ui.listing_detail.DetailsFragment"
