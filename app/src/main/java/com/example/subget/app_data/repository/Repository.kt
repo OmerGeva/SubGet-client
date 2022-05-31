@@ -14,17 +14,20 @@ class Repository @Inject constructor(
     private val localDataSource : DatabaseDAO
 ){
 
-    fun repoGetListings() = performFetchingAndSaving(
-        {localDataSource.localGetListings()},
-        {remoteDataSource.remoteGetListings()},
+    // Fetch all Listings from local and remote databases
+    fun repoFetchListings() = performFetchingAndSaving(
+        {localDataSource.localGetAllListings()},
+        {remoteDataSource.remoteGetAllListings()},
         {localDataSource.insert(it.listings)}
     )
-    fun repoGetFavorites() : LiveData<List<Listing>> {
-        return localDataSource.localGetFavorites()
-    }
-    fun getSingleListing(id : Int) = performFetchingAndSaving(
-        {localDataSource.getListing(id)},
-        {remoteDataSource.remoteGetSingleListing(id)},
-        {localDataSource.insertSingleListing(it)}
-    )
+
+    // Get all Listings that are classified as favorites from local database
+    fun repoGetFavorites() : LiveData<List<Listing>> = localDataSource.localGetFavorites()
+
+    // Get all Listings from local database
+    fun repoGetAllListings() : LiveData<List<Listing>> = localDataSource.localGetAllListings()
+
+    // Get a single Listing from local database
+    fun repoGetSingleListing(id : Int) : LiveData<Listing> = localDataSource.localGetSingleListing(id)
+
 }
