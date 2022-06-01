@@ -17,6 +17,7 @@ import com.example.subget.ui.listings.ListingsViewModel
 import com.example.subget.utils.Error
 import com.example.subget.utils.Loading
 import com.example.subget.utils.Success
+
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -44,7 +45,7 @@ class HomeFragment : Fragment() {
 
         fetchData()
         binding.buttonSearch.setOnClickListener {
-            Toast.makeText(context, binding.addressSearch.text, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, binding.addressSearch.text, Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_home_to_Listings,
                 bundleOf("address" to "%"+binding.addressSearch.text+"%"))
         }

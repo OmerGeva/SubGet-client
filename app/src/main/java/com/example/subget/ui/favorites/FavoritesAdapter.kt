@@ -39,6 +39,9 @@ class FavoritesAdapter(private val listener : FavoritesFragment) :
                 .load(item.image)
                 .circleCrop()
                 .into(itemBinding.cardImage)
+            itemBinding.heartIcon.setOnClickListener {
+                itemBinding.heartIcon.isSelected = !itemBinding.heartIcon.isSelected
+            }
 
         }
 
