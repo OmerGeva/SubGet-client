@@ -55,18 +55,18 @@ class HomeFragment : Fragment() {
         viewModel.listings.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> {
-                    binding.loadingBar.visibility = View.VISIBLE
-                    binding.loadingText.visibility = View.VISIBLE
+//                    binding.loadingBar.visibility = View.VISIBLE
+//                    binding.loadingText.visibility = View.VISIBLE
                 }
 
                 is Success -> {
-                    binding.loadingBar.visibility = View.INVISIBLE
-                    binding.loadingText.text = "SUCCESS MESSAGE"
+//                    binding.loadingBar.visibility = View.INVISIBLE
+//                    binding.loadingText.text = "SUCCESS MESSAGE"
                 }
 
                 is Error -> {
-                    binding.loadingBar.visibility = View.INVISIBLE
-                    binding.loadingText.text = "ERROR MESSAGE"
+//                    binding.loadingBar.visibility = View.INVISIBLE
+//                    binding.loadingText.text = "ERROR MESSAGE"
                 }
             }
         }

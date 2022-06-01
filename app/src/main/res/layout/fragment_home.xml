@@ -10,21 +10,22 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Home Fragment"
+            android:text="Welcome to SubGet! "
+            android:textColor="@color/black"
             android:textSize="30dp" />
-
         <TextView
-            android:id="@+id/loadingText"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Loading.."
-            android:visibility="invisible"
-            android:textSize="30dp" />
+            android:text="Please select your desired apartment:"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
 
         <ProgressBar
             android:id="@+id/loadingBar"
@@ -62,6 +63,7 @@
                 android:inputType="text"
                 android:drawableLeft="@drawable/map35_2"
                 android:drawableStart="@drawable/map35_2"
+                android:background="@drawable/edit_text_background"
                 android:drawablePadding="10dp"
                 android:hint="Address"/>
 
@@ -108,13 +110,13 @@
 
 
         </LinearLayout>
-        <ImageView
-            android:id="@+id/heart_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/heart_selector"
-            />
+<!--        <ImageView-->
+<!--            android:id="@+id/heart_icon"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:src="@drawable/heart_selector"-->
+<!--            />-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,14 +127,15 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_search"
                 android:layout_width="250dp"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:backgroundTint="@null"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="50dp"
                 android:layout_marginVertical="20dp"
-
+                android:textColor="@color/white"
+                android:textSize="24dp"
                 android:background="@drawable/rounded_corners2"
-                android:text="Click here..." />
+                android:text="Search!" />
         </LinearLayout>
 
     </LinearLayout>
