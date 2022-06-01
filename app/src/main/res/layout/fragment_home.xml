@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
@@ -34,7 +35,97 @@
 
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxStrokeColor="@null"
+            app:boxBackgroundColor="@color/background_blue"
+            android:outlineSpotShadowColor="@color/white">
+
+            <EditText
+                android:id="@+id/address_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:inputType="text"
+                android:drawableLeft="@drawable/map35_2"
+                android:drawableStart="@drawable/map35_2"
+                android:drawablePadding="10dp"
+                android:hint="Address"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/pet_allowed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pets Allowed"
+                android:textSize="10dp" />
+
+            <CheckBox
+                android:id="@+id/washing_machine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Washing Machine"
+                android:textSize="10dp" />
+
+            <CheckBox
+                android:id="@+id/wifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="WiFi"
+                android:textSize="10dp" />
+
+            <CheckBox
+                android:id="@+id/near_beach"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Near The Beach"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_search"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@null"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginVertical="20dp"
+
+                android:background="@drawable/rounded_corners2"
+                android:text="Click here..." />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 
-</FrameLayout>
+</LinearLayout>

@@ -24,6 +24,8 @@ interface DatabaseDAO {
     @Query("SELECT * FROM listings WHERE favorite = 0")
     fun localGetFavorites(): LiveData<List<Listing>>
 
-
+    // Get all Listings from Room
+    @Query("SELECT * FROM listings WHERE address LIKE :address")
+    fun localGetListingsByAddress(address: String): LiveData<List<Listing>>
 
 }

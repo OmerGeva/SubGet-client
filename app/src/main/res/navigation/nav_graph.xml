@@ -10,6 +10,9 @@
         android:name="com.example.subget.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_Listings"
+            app:destination="@id/navigation_listings"/>
     </fragment>
     <fragment
         android:id="@+id/navigation_listings"
@@ -35,5 +38,10 @@
         android:label="@string/title_details"
         tools:layout="@layout/fragment_details" >
     </fragment>
+    <fragment
+        android:id="@+id/navigation_addListing"
+        android:name="com.example.subget.ui.add_listing.AddListingFragment"
+        android:label="fragment_add_listing"
+        tools:layout="@layout/fragment_add_listing" />
 
 </navigation>
