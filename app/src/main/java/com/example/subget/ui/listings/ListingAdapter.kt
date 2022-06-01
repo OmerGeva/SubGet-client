@@ -3,6 +3,7 @@ package com.example.subget.ui.listings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.subget.app_data.models.Listing
@@ -56,7 +57,13 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
             binding.cardTitle.text = listing.title
             binding.cardAddress.text = listing.address
             binding.cardPrice.text = "$" + listing.price.toString()
+            binding.heartIcon.setOnClickListener {
+                binding.heartIcon.isSelected = !binding.heartIcon.isSelected
+            }
         }
+
+
+
 
         override fun onClick(v: View?) {
             callback.onItemClicked(listing.id)

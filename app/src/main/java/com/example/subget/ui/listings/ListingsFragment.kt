@@ -43,12 +43,14 @@ class ListingsFragment : Fragment() {
     }
 
     private fun createRecyclerView() {
-        Toast.makeText(context, "got to the recycle view", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, "got to the recycle view", Toast.LENGTH_SHORT).show()
         binding.listingRecycler.layoutManager = LinearLayoutManager(requireContext())
         adapter = ListingAdapter(this@ListingsFragment)
         binding.listingRecycler.adapter = adapter
         viewModel.listings.observe(viewLifecycleOwner) { adapter.setListings(it) }
     }
+
+
 
     fun onItemClicked(listingID : Int) {
         findNavController().navigate(R.id.action_allListings_to_detailedListing,
