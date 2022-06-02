@@ -15,7 +15,6 @@ data class Listing(
     val phone_number: String,
     val contact_name: String,
     val image: String,
-
     val washing_machine: Boolean,
     val pet_allowed: Boolean,
     val near_beach: Boolean,
