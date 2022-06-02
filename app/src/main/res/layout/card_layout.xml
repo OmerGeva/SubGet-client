@@ -5,20 +5,17 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
     app:cardBackgroundColor="@android:color/transparent"
-    app:cardElevation="0dp"
-    app:cardPreventCornerOverlap="false"
-    app:contentPadding="0dp">
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:contentPadding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:padding="8dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="16dp"
-        android:background="@color/white"
-        >
-<!--        android:background="@drawable/rounded_corners"-->
-<!--        >-->
-
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"

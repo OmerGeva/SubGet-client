@@ -37,7 +37,6 @@ class FavoritesAdapter(private val listener : FavoritesFragment) :
             itemBinding.cardPrice.text = listing.price.toString() + " $"
             Glide.with(itemBinding.root)
                 .load(item.image)
-                .circleCrop()
                 .into(itemBinding.cardImage)
             itemBinding.heartIcon.setOnClickListener {
                 itemBinding.heartIcon.isSelected = !itemBinding.heartIcon.isSelected
