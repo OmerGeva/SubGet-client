@@ -30,7 +30,10 @@ class Repository @Inject constructor(
     // Get a single Listing from local database
     fun repoGetSingleListing(id : Int) : LiveData<Listing> = localDataSource.localGetSingleListing(id)
 
-    //Get listing that contain a given address
-    fun repoGetListingByAddress(address: String) : LiveData<List<Listing>> = localDataSource.localGetListingsByAddress(address)
+    // Get all Listings that match search result from database
+    fun repoGetSearchResults(location : String) : LiveData<List<Listing>> = localDataSource.localGetSearchResults(location)
+
+    // Get all Favorites Listings that match search result from database
+    fun repoGetFavoritesSearchResults(location : String) : LiveData<List<Listing>> = localDataSource.localGetFavoritesSearchResults(location)
 
 }

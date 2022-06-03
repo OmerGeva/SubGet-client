@@ -4,7 +4,7 @@
 
 <!--All images are place holders, we need to decide on transparent icons-->
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_listings"
         android:icon="@drawable/washing_machine"
         android:title="@string/title_home" />
 

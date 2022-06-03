@@ -14,23 +14,13 @@ class ListingsViewModel @Inject constructor(
     repository: Repository
 ) : ViewModel() {
 
-    private val _address =  MutableLiveData<String>()
+    // All listings
+    val listings  = repository.repoFetchListings()
 
-    private val _listing = _address.switchMap {
-        repository.repoGetListingByAddress(it)
+    // Populate RecyclerView with search results
+    private val repo = repository
+    fun searchForListings(location: String) : LiveData<List<Listing>> {
+       return repo.repoGetSearchResults(location)
     }
-//    val listings  = repository.repoGetAllListings()
-    val listings : LiveData<List<Listing>> = _listing
 
-    fun setAddress(address : String) {
-        _address.value = address
-    }
 }
-
-
-
-
-//{
-//
-//    val listings  = repository.repoGetAllListings()
-//}
