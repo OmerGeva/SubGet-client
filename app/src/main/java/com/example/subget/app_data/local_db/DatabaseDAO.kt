@@ -12,6 +12,10 @@ interface DatabaseDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(listings: List<Listing>)
 
+    // Inserts a list of Listings into Room
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertOne(listing: Listing)
+
     // Get all Listings from Room
     @Query("SELECT * FROM listings")
     fun localGetAllListings(): LiveData<List<Listing>>

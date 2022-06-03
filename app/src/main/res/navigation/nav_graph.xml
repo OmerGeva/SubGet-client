@@ -42,6 +42,16 @@
         android:id="@+id/navigation_addListing"
         android:name="com.example.subget.ui.add_listing.AddListingFragment"
         android:label="fragment_add_listing"
-        tools:layout="@layout/fragment_add_listing" />
+        tools:layout="@layout/fragment_add_listing" >
+        <action
+            android:id="@+id/action_addListings_to_allListings"
+            app:destination="@id/navigation_listings"/>
+        <action
+            android:id="@+id/action_addListings_to_detailedListing"
+            app:destination="@id/navigation_details"/>
+        <action
+            android:id="@+id/action_addListings_to_home"
+            app:destination="@id/navigation_home"/>
+    </fragment>
 
 </navigation>

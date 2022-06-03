@@ -28,3 +28,19 @@ fun <T,A> performFetchingAndSaving(localDbFetch: () -> LiveData<T>,
             emitSource(source)
         }
     }
+fun <T> performFetchingAndSavingPost(remoteDbPost: suspend () -> Resource<T>,
+                                        localDbSave: suspend (T) -> Unit) : LiveData<Resource<T>> =
+
+    liveData(Dispatchers.IO) {
+
+        val postResource = remoteDbPost()
+
+        if(postResource.status is Success){
+            localDbSave(postResource.status.data!!)
+            emit(postResource)
+        }
+
+        else if(postResource.status is Error){
+            emit(Resource.error(postResource.status.message))
+        }
+    }

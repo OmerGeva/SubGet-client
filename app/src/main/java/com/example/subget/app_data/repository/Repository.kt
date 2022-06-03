@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import com.example.subget.app_data.local_db.DatabaseDAO
 import com.example.subget.app_data.models.Listing
 import com.example.subget.app_data.remote_db.RemoteDataSource
+import com.example.subget.utils.Resource
 import com.example.subget.utils.performFetchingAndSaving
+import com.example.subget.utils.performFetchingAndSavingPost
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,5 +34,10 @@ class Repository @Inject constructor(
 
     //Get listing that contain a given address
     fun repoGetListingByAddress(address: String) : LiveData<List<Listing>> = localDataSource.localGetListingsByAddress(address)
+
+    suspend fun repoCreateListing(listing: Listing) = performFetchingAndSavingPost(
+        { remoteDataSource.remoteCreateNewListing(listing) },
+        { localDataSource.insertOne(listing) }
+    )
 
 }
