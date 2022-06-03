@@ -1,17 +1,27 @@
 package com.example.subget.ui.listings
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.subget.R
 import com.example.subget.databinding.FragmentListingsBinding
+import com.example.subget.ui.MainActivity
+import com.example.subget.utils.Error
+import com.example.subget.utils.Loading
+import com.example.subget.utils.Success
+
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,30 +36,79 @@ class ListingsFragment : Fragment() {
 
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentListingsBinding.inflate(inflater, container, false)
+        activity?.setActionBar(activity?.findViewById(R.id.toolbar))
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getString("address")?.let { viewModel.setAddress(it) }
-        viewModel.listings.observe(viewLifecycleOwner) { createRecyclerView() }
+
         createRecyclerView()
+        getSearchResults()
+
+    }
+
+
+    private fun getSearchResults() {
+        binding.toolbarSearch.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    getItemsFromDb(query)
+                }
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    getItemsFromDb(newText)
+                }
+
+                return true
+            }
+        })
+
+
+    }
+
+    private fun getItemsFromDb(searchText: String) {
+        var searchText = searchText
+        searchText = "%$searchText%"
+
+        viewModel.searchForListings(location = searchText).observe(viewLifecycleOwner) { adapter.setListings(it)}
+
     }
 
     private fun createRecyclerView() {
         binding.listingRecycler.layoutManager = LinearLayoutManager(requireContext())
         adapter = ListingAdapter(this@ListingsFragment)
         binding.listingRecycler.adapter = adapter
-        viewModel.listings.observe(viewLifecycleOwner) { adapter.setListings(it) }
+        viewModel.listings.observe(viewLifecycleOwner) {
+            when (it.status) {
+                is Loading -> {
+                    binding.loadingScreen.visibility = View.VISIBLE
+                }
+
+                is Success -> {
+                    binding.loadingScreen.visibility = View.GONE
+                    binding.toolbarSearch.toolbar.visibility = View.VISIBLE
+                    binding.recyclerLayout.visibility = View.VISIBLE
+                    adapter.setListings(it.status.data!!)
+                }
+
+                is Error -> {
+                    Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
-
-
 
     fun onItemClicked(listingID : Int) {
         findNavController().navigate(R.id.action_allListings_to_detailedListing,
@@ -59,4 +118,5 @@ class ListingsFragment : Fragment() {
     fun onItemLongClick(adapterPosition: Int) {
         print(false)
     }
+
 }

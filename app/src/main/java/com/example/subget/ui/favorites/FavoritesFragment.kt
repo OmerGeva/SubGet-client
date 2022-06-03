@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -29,6 +30,8 @@ class FavoritesFragment : Fragment() {
     ): View? {
 
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        activity?.setActionBar(activity?.findViewById(R.id.toolbar))
+        binding.toolbarSearch.toolbar.visibility = View.VISIBLE
         return binding.root
     }
 
@@ -36,6 +39,33 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         createRecyclerView()
+        getSearchResults()
+
+    }
+
+
+    private fun getSearchResults() {
+        binding.toolbarSearch.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    getItemsFromDb(query)
+                }
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    getItemsFromDb(newText)
+                }
+                return true
+            }
+        })
+    }
+
+    private fun getItemsFromDb(searchText: String) {
+        var searchText = searchText
+        searchText = "%$searchText%"
+        viewModel.searchForListings(location = searchText).observe(viewLifecycleOwner) { adapter.setFavorites(it)}
     }
 
     private fun createRecyclerView() {
