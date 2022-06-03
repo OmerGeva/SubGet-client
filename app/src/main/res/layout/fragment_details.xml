@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.listing_detail.DetailsFragment"
+    android:id="@+id/detailShowPageId"
     android:background="@color/white">
     <ImageView
         android:id="@+id/detailedImage"
