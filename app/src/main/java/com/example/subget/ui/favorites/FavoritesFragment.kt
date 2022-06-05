@@ -65,7 +65,7 @@ class FavoritesFragment : Fragment() {
     private fun getItemsFromDb(searchText: String) {
         var searchText = searchText
         searchText = "%$searchText%"
-        viewModel.searchForListings(location = searchText).observe(viewLifecycleOwner) { adapter.setFavorites(it)}
+        viewModel.viewModelGetFavoritesSearchResults(location = searchText).observe(viewLifecycleOwner) { adapter.setFavorites(it)}
     }
 
     private fun createRecyclerView() {

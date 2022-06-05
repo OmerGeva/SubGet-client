@@ -10,22 +10,20 @@ import com.example.subget.app_data.models.Listing
 import com.example.subget.app_data.repository.Repository
 import com.example.subget.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddListingViewModel @Inject constructor(
-    repository: Repository
+    private val repository: Repository
 ) : ViewModel() {
 
-    var repo = repository
-    var listingDetail: LiveData<Resource<Listing>>? = null
+    var newListing: LiveData<Resource<Listing>>? = null
 
-    fun addItem(listing : Listing) {
-        viewModelScope.launch {
-            listingDetail = repo.repoCreateListing(listing)
-        }
+    // Saves a Listing in remote and local database
+    fun viewModelCreateListing(listing : Listing) = viewModelScope.launch { async(IO) {
+        newListing = repository.repoCreateListing(listing) }
     }
-
-
 }

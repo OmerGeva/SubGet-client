@@ -38,10 +38,6 @@ class FavoritesAdapter(private val listener : FavoritesFragment) :
             Glide.with(itemBinding.root)
                 .load(item.image)
                 .into(itemBinding.cardImage)
-            itemBinding.heartIcon.setOnClickListener {
-                itemBinding.heartIcon.isSelected = !itemBinding.heartIcon.isSelected
-            }
-
         }
 
         override fun onClick(v: View?) {

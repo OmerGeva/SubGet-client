@@ -1,19 +1,15 @@
 package com.example.subget.ui.listing_detail
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.subget.R
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.FragmentDetailsBinding
-import com.example.subget.utils.Loading
-import com.example.subget.utils.Success
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +32,18 @@ class DetailsFragment : Fragment() {
 
         arguments?.getInt("id")?.let { viewModel.setId(it) }
         viewModel.listing.observe(viewLifecycleOwner) { setListing(it) }
+
+        binding.heartIcon.setOnClickListener {
+            binding.heartIcon.isSelected = !binding.heartIcon.isSelected
+            viewModel.viewModelUpdateFavorite()
+        }
     }
+
+
+
+
+
+
 
     private fun setListing(listing: Listing) {
         binding.detailedTitle.text = listing.title
@@ -46,6 +53,7 @@ class DetailsFragment : Fragment() {
         binding.detailedPhone.text = listing.phone_number
         binding.detailedContactName.text = listing.contact_name
         binding.detailedPrice.text = "$" + listing.price.toString()
+        binding.heartIcon.isSelected = listing.favorite
         Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
         setIcons(listing)
     }

@@ -24,5 +24,5 @@ data class Listing(
     val floor: Int,
     val price: Int,
  
-    val favorite: Int
+    val favorite: Boolean
     )
