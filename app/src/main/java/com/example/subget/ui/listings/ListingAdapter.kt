@@ -22,7 +22,6 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
 
     interface ListingListener {
         fun onItemClicked(index: Int)
-        fun onItemLongClick(index: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -42,13 +41,12 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
 
     inner class ListingViewHolder(private val binding: CardLayoutBinding) :
         RecyclerView.ViewHolder(binding.root),
-        View.OnClickListener, View.OnLongClickListener {
+        View.OnClickListener {
 
         private lateinit var listing: Listing
 
         init {
             binding.root.setOnClickListener(this)
-            binding.root.setOnLongClickListener(this)
         }
 
         fun bind(listing: Listing) {
@@ -57,24 +55,10 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
             binding.cardTitle.text = listing.title
             binding.cardAddress.text = listing.address
             binding.cardPrice.text = "$" + listing.price.toString()
-            binding.heartIcon.setOnClickListener {
-                binding.heartIcon.isSelected = !binding.heartIcon.isSelected
-            }
         }
-
-
-
 
         override fun onClick(v: View?) {
             callback.onItemClicked(listing.id)
         }
-
-        override fun onLongClick(v: View?): Boolean {
-            callback.onItemLongClick(adapterPosition)
-            return true
-        }
-
-
-
     }
 }

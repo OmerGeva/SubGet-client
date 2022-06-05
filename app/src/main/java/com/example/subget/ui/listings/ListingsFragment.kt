@@ -1,23 +1,18 @@
 package com.example.subget.ui.listings
 
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.subget.R
 import com.example.subget.databinding.FragmentListingsBinding
-import com.example.subget.ui.MainActivity
 import com.example.subget.utils.Error
 import com.example.subget.utils.Loading
 import com.example.subget.utils.Success
@@ -33,8 +28,6 @@ class ListingsFragment : Fragment() {
 
     private var _binding: FragmentListingsBinding? = null
     private val binding get() = _binding!!
-
-
 
 
     override fun onCreateView(
@@ -56,34 +49,26 @@ class ListingsFragment : Fragment() {
 
     }
 
-
     private fun getSearchResults() {
         binding.toolbarSearch.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    getItemsFromDb(query)
-                }
+                if (query != null) { getSearchResults(query) }
                 return true
             }
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null) {
-                    getItemsFromDb(newText)
-                }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) { getSearchResults(newText) }
                 return true
             }
         })
-
-
     }
 
-    private fun getItemsFromDb(searchText: String) {
+    private fun getSearchResults(searchText: String) {
         var searchText = searchText
         searchText = "%$searchText%"
 
-        viewModel.searchForListings(location = searchText).observe(viewLifecycleOwner) { adapter.setListings(it)}
-
+        viewModel.viewModelGetSearchResults(location = searchText).observe(viewLifecycleOwner) { adapter.setListings(it)}
     }
 
     private fun createRecyclerView() {
@@ -114,9 +99,4 @@ class ListingsFragment : Fragment() {
         findNavController().navigate(R.id.action_allListings_to_detailedListing,
             bundleOf("id" to listingID))
     }
-
-    fun onItemLongClick(adapterPosition: Int) {
-        print(false)
-    }
-
 }

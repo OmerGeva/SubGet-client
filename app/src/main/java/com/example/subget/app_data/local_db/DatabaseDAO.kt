@@ -9,12 +9,12 @@ import com.example.subget.app_data.models.Listing
 interface DatabaseDAO {
 
     // Inserts a list of Listings into Room
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(listings: List<Listing>)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun localInsertAllListings(listings: List<Listing>)
 
-    // Inserts a list of Listings into Room
+    // Inserts a single Listing into Room
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOne(listing: Listing)
+    fun localInsertListing(listing: Listing)
 
     // Get all Listings from Room
     @Query("SELECT * FROM listings")
@@ -25,13 +25,19 @@ interface DatabaseDAO {
     fun localGetSingleListing(id: Int): LiveData<Listing>
 
     // Get all Listings which are classified as favorites from Room
-    @Query("SELECT * FROM listings WHERE favorite = 0")
+    @Query("SELECT * FROM listings WHERE favorite = 1")
     fun localGetFavorites(): LiveData<List<Listing>>
 
+    // Get all Listings which match the search result
     @Query("SELECT * FROM listings WHERE address LIKE  :location")
     fun localGetSearchResults(location : String) : LiveData<List<Listing>>
 
-    @Query("SELECT * FROM listings WHERE address LIKE  :location AND favorite = 0")
+    // Get all favorite Listings which match the search result
+    @Query("SELECT * FROM listings WHERE address LIKE  :location AND favorite = 1")
     fun localGetFavoritesSearchResults(location : String) : LiveData<List<Listing>>
+
+    // Updates Listing favorite status
+    @Query("UPDATE listings SET favorite = :favorite WHERE id = :listingId")
+    fun localUpdateFavorite(listingId: Int, favorite: Boolean)
 
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import com.example.subget.app_data.local_db.DatabaseDAO
 import com.example.subget.app_data.models.Listing
 import com.example.subget.app_data.remote_db.RemoteDataSource
-import com.example.subget.utils.Resource
 import com.example.subget.utils.performFetchingAndSaving
 import com.example.subget.utils.performFetchingAndSavingPost
 import javax.inject.Inject
@@ -20,7 +19,7 @@ class Repository @Inject constructor(
     fun repoFetchListings() = performFetchingAndSaving(
         {localDataSource.localGetAllListings()},
         {remoteDataSource.remoteGetAllListings()},
-        {localDataSource.insert(it.listings)}
+        {localDataSource.localInsertAllListings(it.listings)}
     )
 
     // Get all Listings that are classified as favorites from local database
@@ -40,7 +39,9 @@ class Repository @Inject constructor(
 
     suspend fun repoCreateListing(listing: Listing) = performFetchingAndSavingPost(
         { remoteDataSource.remoteCreateNewListing(listing) },
-        { localDataSource.insertOne(listing) }
+        { localDataSource.localInsertListing(listing) }
     )
+
+    fun repoUpdateFavorite(listingId: Int, favorite: Boolean) = localDataSource.localUpdateFavorite(listingId, favorite)
 
 }

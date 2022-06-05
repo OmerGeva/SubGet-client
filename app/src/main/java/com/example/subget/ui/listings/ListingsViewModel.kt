@@ -11,16 +11,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListingsViewModel @Inject constructor(
-    repository: Repository
+    private val repository: Repository
 ) : ViewModel() {
 
     // All listings
     val listings  = repository.repoFetchListings()
 
     // Populate RecyclerView with search results
-    private val repo = repository
-    fun searchForListings(location: String) : LiveData<List<Listing>> {
-       return repo.repoGetSearchResults(location)
-    }
+    fun viewModelGetSearchResults(location: String) : LiveData<List<Listing>> = repository.repoGetSearchResults(location)
+
 
 }

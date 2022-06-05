@@ -1,21 +1,17 @@
 package com.example.subget.ui.add_listing
 
-import android.content.ClipData
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.subget.R
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.FragmentAddListingBinding
-import com.example.subget.ui.favorites.FavoritesViewModel
 import com.example.subget.utils.Constants.Companion.PLACE_HOLDER_IMAGE
 import com.example.subget.utils.Loading
 import com.example.subget.utils.Success
@@ -40,7 +36,7 @@ class AddListingFragment : Fragment() {
 
         binding.submitButton.setOnClickListener {
             with(viewModel) {
-                addItem(
+                viewModelCreateListing(
                     Listing(
                         id,
                         title = binding.title.text.toString(),
@@ -57,11 +53,11 @@ class AddListingFragment : Fragment() {
                         floor = Integer.parseInt(binding.floor.text.toString()),
                         price = Integer.parseInt(binding.price.text.toString()),
                         bathrooms = Integer.parseInt(binding.bathrooms.text.toString()),
-                        favorite = 0
+                        favorite = false
                     )
                 )
             }
-            viewModel.listingDetail?.observe(viewLifecycleOwner) {
+            viewModel.newListing?.observe(viewLifecycleOwner) {
                 // navigate to the listing detail
                 Log.d("it", it.toString())
                 Log.d("stats", it.status.toString())

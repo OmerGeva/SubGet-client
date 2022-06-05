@@ -17,7 +17,5 @@ class FavoritesViewModel @Inject constructor(
 
     // Populate RecyclerView with search results
     private val repo = repository
-    fun searchForListings(location: String) : LiveData<List<Listing>> {
-        return repo.repoGetFavoritesSearchResults(location)
-    }
+    fun viewModelGetFavoritesSearchResults(location: String) : LiveData<List<Listing>> = repo.repoGetFavoritesSearchResults(location)
 }
