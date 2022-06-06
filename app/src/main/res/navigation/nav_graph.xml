@@ -37,6 +37,9 @@
         android:name="com.example.subget.ui.listing_detail.DetailsFragment"
         android:label="@string/title_details"
         tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_navigation_details_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_addListing"
@@ -53,5 +56,10 @@
             android:id="@+id/action_addListings_to_home"
             app:destination="@id/navigation_home"/>
     </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.subget.ui.listing_detail.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
 
 </navigation>
