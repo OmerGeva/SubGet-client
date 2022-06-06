@@ -1,5 +1,6 @@
 package com.example.subget.ui.listings
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -83,16 +84,27 @@ class ListingsFragment : Fragment() {
 
                 is Success -> {
                     binding.loadingScreen.visibility = View.GONE
-                    binding.toolbarSearch.toolbar.visibility = View.VISIBLE
                     binding.recyclerLayout.visibility = View.VISIBLE
                     adapter.setListings(it.status.data!!)
                 }
 
                 is Error -> {
-                    Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
+                    dialog("Ooops, we've encountered the following error: " + it.status.message)
                 }
             }
         }
+    }
+
+    private fun dialog(message: String) {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setMessage(message)
+        dialog.setPositiveButton("OK") { _, _ ->
+            // Do something
+        }
+        dialog.setNegativeButton("NOT OK") { dialog, _ ->
+            dialog.cancel()
+        }
+        dialog.create().show()
     }
 
     fun onItemClicked(listingID : Int) {

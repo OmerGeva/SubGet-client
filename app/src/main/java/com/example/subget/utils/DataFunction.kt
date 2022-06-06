@@ -7,9 +7,9 @@ import androidx.lifecycle.map
 import kotlinx.coroutines.Dispatchers
 
 
-fun <T,A> performFetchingAndSaving(localDbFetch: () -> LiveData<T>,
-                                   remoteDbFetch: suspend () -> Resource<A>,
-                                   localDbSave: suspend (A) -> Unit) : LiveData<Resource<T>> =
+fun <T,A> performGetAndSaving(localDbFetch: () -> LiveData<T>,
+                              remoteDbFetch: suspend () -> Resource<A>,
+                              localDbSave: suspend (A) -> Unit) : LiveData<Resource<T>> =
 
     liveData(Dispatchers.IO) {
 
@@ -28,10 +28,13 @@ fun <T,A> performFetchingAndSaving(localDbFetch: () -> LiveData<T>,
             emitSource(source)
         }
     }
-fun <T> performFetchingAndSavingPost(remoteDbPost: suspend () -> Resource<T>,
-                                        localDbSave: suspend (T) -> Unit) : LiveData<Resource<T>> =
+fun <T> performPostAndSaving(remoteDbPost: suspend () -> Resource<T>,
+                             localDbSave: suspend (T) -> Unit) : LiveData<Resource<T>> =
+
 
     liveData(Dispatchers.IO) {
+
+        emit(Resource.loading())
 
         val postResource = remoteDbPost()
 

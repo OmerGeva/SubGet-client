@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.subget.R
@@ -31,7 +33,13 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.getInt("id")?.let { viewModel.setId(it) }
-        viewModel.listing.observe(viewLifecycleOwner) { setListing(it) }
+        viewModel.listing.observe(viewLifecycleOwner) {
+            if (it == null) {
+                Toast.makeText(requireContext(), "null", LENGTH_SHORT).show()
+            } else {
+                setListing(it)
+            }
+             }
 
         binding.heartIcon.setOnClickListener {
             binding.heartIcon.isSelected = !binding.heartIcon.isSelected

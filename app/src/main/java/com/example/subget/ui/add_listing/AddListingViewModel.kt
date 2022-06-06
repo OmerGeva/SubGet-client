@@ -1,9 +1,7 @@
 package com.example.subget.ui.add_listing
 
 import androidx.core.os.bundleOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.example.subget.R
 import com.example.subget.app_data.models.Listing
@@ -20,10 +18,16 @@ class AddListingViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    var newListing: LiveData<Resource<Listing>>? = null
-
-    // Saves a Listing in remote and local database
-    fun viewModelCreateListing(listing : Listing) = viewModelScope.launch { async(IO) {
-        newListing = repository.repoCreateListing(listing) }
+    // Create the Listing
+    private val _listing =  MutableLiveData<Listing>()
+    fun setListing(listing: Listing) {
+        _listing.value = listing
     }
+
+    // Upload Listing and get
+    private val _newListing = _listing.switchMap {
+        repository.repoCreateListing(it)
+    }
+    val newListing : LiveData<Resource<Listing>> = _newListing
+
 }

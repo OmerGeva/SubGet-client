@@ -13,7 +13,7 @@ interface DatabaseDAO {
     fun localInsertAllListings(listings: List<Listing>)
 
     // Inserts a single Listing into Room
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun localInsertListing(listing: Listing)
 
     // Get all Listings from Room

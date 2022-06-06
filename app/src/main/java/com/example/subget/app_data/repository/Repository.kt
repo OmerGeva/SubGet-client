@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import com.example.subget.app_data.local_db.DatabaseDAO
 import com.example.subget.app_data.models.Listing
 import com.example.subget.app_data.remote_db.RemoteDataSource
-import com.example.subget.utils.performFetchingAndSaving
-import com.example.subget.utils.performFetchingAndSavingPost
+import com.example.subget.utils.performGetAndSaving
+import com.example.subget.utils.performPostAndSaving
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,7 +16,7 @@ class Repository @Inject constructor(
 ){
 
     // Fetch all Listings from local and remote databases
-    fun repoFetchListings() = performFetchingAndSaving(
+    fun repoFetchListings() = performGetAndSaving(
         {localDataSource.localGetAllListings()},
         {remoteDataSource.remoteGetAllListings()},
         {localDataSource.localInsertAllListings(it.listings)}
@@ -29,7 +29,7 @@ class Repository @Inject constructor(
     fun repoGetAllListings() : LiveData<List<Listing>> = localDataSource.localGetAllListings()
 
     // Get a single Listing from local database
-    fun repoGetSingleListing(id : Int) : LiveData<Listing> = localDataSource.localGetSingleListing(id)
+    fun repoGetSingleListing(id: Int) : LiveData<Listing> = localDataSource.localGetSingleListing(id)
 
     // Get all Listings that match search result from database
     fun repoGetSearchResults(location : String) : LiveData<List<Listing>> = localDataSource.localGetSearchResults(location)
@@ -37,7 +37,7 @@ class Repository @Inject constructor(
     // Get all Favorites Listings that match search result from database
     fun repoGetFavoritesSearchResults(location : String) : LiveData<List<Listing>> = localDataSource.localGetFavoritesSearchResults(location)
 
-    suspend fun repoCreateListing(listing: Listing) = performFetchingAndSavingPost(
+    fun repoCreateListing(listing: Listing) = performPostAndSaving(
         { remoteDataSource.remoteCreateNewListing(listing) },
         { localDataSource.localInsertListing(listing) }
     )
