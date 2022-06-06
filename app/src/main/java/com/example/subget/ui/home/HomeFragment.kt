@@ -46,8 +46,7 @@ class HomeFragment : Fragment() {
         fetchData()
         binding.buttonSearch.setOnClickListener {
 //            Toast.makeText(context, binding.addressSearch.text, Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_home_to_Listings,
-                bundleOf("address" to "%"+binding.addressSearch.text+"%"))
+
         }
     }
 

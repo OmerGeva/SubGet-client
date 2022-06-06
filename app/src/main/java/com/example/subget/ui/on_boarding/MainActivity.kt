@@ -26,37 +26,37 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        // Bottom Navigation Bar
-        val navView: BottomNavigationView = binding.navView
-
-        val navController = findNavController(R.id.nav_host_fragment)
+//
+//        // Bottom Navigation Bar
+//        val navView: BottomNavigationView = binding.navView
+//
+//        val navController = findNavController(R.id.nav_host_fragment)
 //        val appBarConfiguration = AppBarConfiguration(
 //            setOf(
 //                R.id.navigation_listings, R.id.navigation_addListing, R.id.navigation_favorites
 //            )
 //        )
-
-        navView.setupWithNavController(navController)
-
-        hideBottomNav()
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when(destination.id) {
-                R.id.navigation_details -> hideBottomNav()
-                R.id.navigation_listings -> showBottomNav()
-                R.id.navigation_favorites -> showBottomNav()
-                R.id.navigation_addListing -> showBottomNav()
-            }
-        }
+//
+//        navView.setupWithNavController(navController)
+//
+//        hideBottomNav()
+//
+//        navController.addOnDestinationChangedListener { _, destination, _ ->
+//            when(destination.id) {
+//                R.id.navigation_details -> hideBottomNav()
+//                R.id.navigation_listings -> showBottomNav()
+//                R.id.navigation_favorites -> showBottomNav()
+//                R.id.navigation_addListing -> showBottomNav()
+//            }
+//        }
     }
 
-    // Hide the NavBar for fragments who don't use it
-    private fun hideBottomNav() {
-        binding.navView.visibility = View.GONE
-    }
-    private fun showBottomNav() {
-        binding.navView.visibility = View.VISIBLE
-    }
+//    // Hide the NavBar for fragments who don't use it
+//    private fun hideBottomNav() {
+//        binding.navView.visibility = View.GONE
+//    }
+//    private fun showBottomNav() {
+//        binding.navView.visibility = View.VISIBLE
+//    }
 
 }
