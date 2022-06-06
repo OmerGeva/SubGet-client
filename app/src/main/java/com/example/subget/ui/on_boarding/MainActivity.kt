@@ -27,22 +27,16 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        // Bottom Navigation Bar
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment)
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.navigation_listings, R.id.navigation_addListing, R.id.navigation_favorites
-//            )
-//        )
 
         navView.setupWithNavController(navController)
 
-        hideBottomNav()
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
+                R.id.navigation_home -> showBottomNav()
                 R.id.navigation_details -> hideBottomNav()
                 R.id.navigation_listings -> showBottomNav()
                 R.id.navigation_favorites -> showBottomNav()

@@ -4,18 +4,23 @@
 
 <!--All images are place holders, we need to decide on transparent icons-->
     <item
-        android:id="@+id/navigation_listings"
-        android:icon="@drawable/washing_machine"
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/icon_home"
         android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_listings"
+        android:icon="@drawable/icon_menu"
+        android:title="Listings" />
 
     <item
         android:id="@+id/navigation_addListing"
         android:icon="@android:drawable/ic_menu_upload"
-        android:title="@string/title_listings" />
+        android:title="Add" />
 
     <item
         android:id="@+id/navigation_favorites"
-        android:icon="@android:drawable/btn_star"
+        android:icon="@drawable/icon_favorites"
         android:title="@string/title_favorites" />
 
 </menu>

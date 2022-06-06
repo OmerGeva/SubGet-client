@@ -3,16 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_listings">
+    app:startDestination="@id/navigation_splash">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.subget.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_home_to_Listings"
-            app:destination="@id/navigation_listings"/>
+
     </fragment>
     <fragment
         android:id="@+id/navigation_listings"
@@ -47,16 +45,32 @@
         android:label="fragment_add_listing"
         tools:layout="@layout/fragment_add_listing" >
         <action
-            android:id="@+id/action_addListings_to_allListings"
-            app:destination="@id/navigation_listings"/>
-        <action
             android:id="@+id/action_addListings_to_detailedListing"
             app:destination="@id/navigation_details"/>
-        <action
-            android:id="@+id/action_addListings_to_home"
-            app:destination="@id/navigation_home"/>
     </fragment>
     <fragment
+        android:id="@+id/navigation_splash"
+        android:name="com.example.subget.ui.on_boarding.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_navigation_splash_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+        <action
+            android:id="@+id/action_navigation_splash_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+
+        android:id="@+id/viewPagerFragment"
+        android:name="com.example.subget.ui.view_pager2.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager">
+        <action
+            android:id="@+id/action_viewPagerFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
         android:id="@+id/mapFragment"
         android:name="com.example.subget.ui.listing_detail.MapFragment"
         android:label="fragment_map"
