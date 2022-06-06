@@ -77,7 +77,8 @@ class AddListingFragment : Fragment() {
         viewModel.newListing.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Success -> {
-                        dialog("Successfully uploaded your Listing!", it.status.data!!.id)
+                    dialog("Successfully uploaded your Listing!", it.status.data!!.id)
+                    clearSelection()
                     binding.logo.visibility = View.VISIBLE
                     binding.uploadProgress.visibility = View.GONE
                 }
@@ -85,6 +86,7 @@ class AddListingFragment : Fragment() {
                     dialog("Ooops, we've encountered the following error: " + it.status.message, -1)
                     binding.logo.visibility = View.VISIBLE
                     binding.uploadProgress.visibility = View.GONE
+
                 }
 
                 is Loading -> {
@@ -110,6 +112,23 @@ class AddListingFragment : Fragment() {
         }
         dialog.create().show()
     }
+
+    private fun clearSelection() {
+        binding.title.text.clear();
+        binding.description.text.clear();
+        binding.address.text.clear();
+        binding.phoneNumber.text.clear();
+        binding.contactName.text.clear();
+        binding.bathrooms.text.clear();
+        binding.floor.text.clear();
+        binding.price.text.clear();
+        binding.bedrooms.text.clear();
+        binding.petAllowed.isChecked = false
+        binding.wifi.isChecked = false
+        binding.nearBeach.isChecked = false
+        binding.washingMachine.isChecked = false
+    }
+
 
     private fun validateInput(): Boolean {
 
