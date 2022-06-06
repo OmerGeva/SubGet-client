@@ -4,8 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@color/background_blue_light"
     android:elevation="4dp"
-    android:id="@+id/toolbar"
-    android:visibility="gone">
+    android:id="@+id/toolbar">
 
     <LinearLayout
         android:layout_width="match_parent"
