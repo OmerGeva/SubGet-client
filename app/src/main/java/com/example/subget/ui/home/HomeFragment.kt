@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.subget.R
+import com.example.subget.app_data.models.Stats
 import com.example.subget.databinding.FragmentDetailsBinding
 import com.example.subget.databinding.FragmentHomeBinding
 import com.example.subget.ui.listings.ListingsViewModel
@@ -44,30 +45,33 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fetchData()
-        binding.buttonSearch.setOnClickListener {
-//            Toast.makeText(context, binding.addressSearch.text, Toast.LENGTH_SHORT).show()
 
-        }
     }
 
     private fun fetchData() {
-        viewModel.listings.observe(viewLifecycleOwner) {
+        viewModel.stats.observe(viewLifecycleOwner) {
             when (it.status) {
-                is Loading -> {
-//                    binding.loadingBar.visibility = View.VISIBLE
-//                    binding.loadingText.visibility = View.VISIBLE
+                is Loading -> { binding.count.text = it.status.toString()
+
                 }
 
                 is Success -> {
-//                    binding.loadingBar.visibility = View.INVISIBLE
-//                    binding.loadingText.text = "SUCCESS MESSAGE"
+                    if (it.status.data == null) { binding.count.text = "null" }
+                    else {binding.count.text = "else"}
+
+
                 }
 
-                is Error -> {
-//                    binding.loadingBar.visibility = View.INVISIBLE
-//                    binding.loadingText.text = "ERROR MESSAGE"
+                is Error -> { binding.count.text = it.status.toString()
+
                 }
             }
         }
+    }
+
+    private fun setStats(stats: Stats) {
+        binding.avg.text = stats.listings_price_avg.toString()
+        binding.max.text = stats.listings_price_max.toString()
+        binding.min.text = stats.listings_price_min.toString()
     }
 }

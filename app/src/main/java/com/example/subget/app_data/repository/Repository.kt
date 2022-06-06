@@ -22,6 +22,12 @@ class Repository @Inject constructor(
         {localDataSource.localInsertAllListings(it.listings)}
     )
 
+    fun repoFetchStats() = performGetAndSaving(
+        {localDataSource.localGetStats()},
+        {remoteDataSource.remoteGetStats()},
+        {localDataSource.localInsertAllStats(it)}
+    )
+
     // Get all Listings that are classified as favorites from local database
     fun repoGetFavorites() : LiveData<List<Listing>> = localDataSource.localGetFavorites()
 

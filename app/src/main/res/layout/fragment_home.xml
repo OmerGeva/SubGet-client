@@ -7,131 +7,40 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Welcome to SubGet! "
-            android:textColor="@color/black"
-            android:textSize="30dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Please select your desired apartment:"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
-
-
-    </LinearLayout>
-    <LinearLayout
+    <TextView
+        android:id="@+id/most_expensive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="TextView" />
 
+    <TextView
+        android:id="@+id/least_expensive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/usernameWrapper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:boxStrokeColor="@null"
-            app:boxBackgroundColor="@color/background_blue"
-            android:outlineSpotShadowColor="@color/white">
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
-            <EditText
-                android:id="@+id/address_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:inputType="text"
-                android:drawableLeft="@drawable/map35_2"
-                android:drawableStart="@drawable/map35_2"
-                android:background="@drawable/edit_text_background"
-                android:drawablePadding="10dp"
-                android:hint="Address"/>
+    <TextView
+        android:id="@+id/min"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/max"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/pet_allowed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pets Allowed"
-                android:textSize="10dp" />
-
-            <CheckBox
-                android:id="@+id/washing_machine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Washing Machine"
-                android:textSize="10dp" />
-
-            <CheckBox
-                android:id="@+id/wifi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="WiFi"
-                android:textSize="10dp" />
-
-            <CheckBox
-                android:id="@+id/near_beach"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Near The Beach"
-                android:textSize="10dp" />
-
-
-
-
-
-        </LinearLayout>
-<!--        <ImageView-->
-<!--            android:id="@+id/heart_icon"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/heart_selector"-->
-<!--            />-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_search"
-                android:layout_width="250dp"
-                android:layout_height="80dp"
-                android:backgroundTint="@null"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="50dp"
-                android:layout_marginVertical="20dp"
-                android:textColor="@color/white"
-                android:textSize="24dp"
-                android:background="@drawable/rounded_corners2"
-                android:text="Search!" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-
+    <TextView
+        android:id="@+id/avg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BLA" />
 </LinearLayout>

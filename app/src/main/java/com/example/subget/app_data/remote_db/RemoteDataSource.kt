@@ -8,9 +8,12 @@ import javax.inject.Singleton
 class RemoteDataSource @Inject constructor(
     private val listingService: ListingService) : BaseDataSource() {
 
-    // Get all listings from remote database
+    // Get all Listings from remote database
     suspend fun remoteGetAllListings() = getResult { listingService.apiGetAllListings() }
 
-    // Upload a new listing to remote database
+    // Get all Stats from remote database
+    suspend fun remoteGetStats() = getResult { listingService.apiGetStats() }
+
+    // Upload a new Listing to remote database
     suspend fun remoteCreateNewListing(listing: Listing) = getResult { listingService.apiCreateNewListing(listing) }
 }

@@ -3,24 +3,33 @@ package com.example.subget.app_data.local_db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.subget.app_data.models.Listing
+import com.example.subget.app_data.models.Stats
 
 
 @Dao
 interface DatabaseDAO {
 
-    // Inserts a list of Listings into Room
+    // Inserts a list of Listings into Listing table
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun localInsertAllListings(listings: List<Listing>)
 
-    // Inserts a single Listing into Room
+    // Inserts a single Listing into Listing table
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun localInsertListing(listing: Listing)
 
-    // Get all Listings from Room
+    // Inserts all Stats into Stats table
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun localInsertAllStats(stats: Stats)
+
+    // Get all Stats from Stats table
+    @Query("SELECT * FROM stats")
+    fun localGetStats() : LiveData<Stats>
+
+    // Get all Listings from Listing table
     @Query("SELECT * FROM listings")
     fun localGetAllListings(): LiveData<List<Listing>>
 
-    // Get a single Listing from Room
+    // Get a single Listing from Listing table
     @Query("SELECT * from listings WHERE id = :id")
     fun localGetSingleListing(id: Int): LiveData<Listing>
 
