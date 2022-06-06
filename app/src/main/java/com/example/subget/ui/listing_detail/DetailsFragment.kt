@@ -1,18 +1,22 @@
 package com.example.subget.ui.listing_detail
 
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.subget.R
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -31,6 +35,26 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//
+
+        binding.mapicon.setOnClickListener {
+            var sendLat: Double? = null
+            var sendLng: Double? = null
+            try {
+                val geocode = Geocoder(context, Locale.getDefault())
+                val addList = geocode.getFromLocationName(binding.detailedAddress.text.toString(),1)
+                sendLat = addList[0].latitude
+                sendLng = addList[0].longitude
+
+
+            }catch (e: Exception){
+                Toast.makeText(context, "Listing isn't verified", LENGTH_SHORT).show()
+            }
+            if((sendLng != null) && (sendLat != null)) {
+                findNavController().navigate(R.id.action_navigation_details_to_mapFragment,
+                    bundleOf("lat" to sendLat, "lng" to sendLng, "title" to (viewModel.listing.value?.title)))
+            }
+        }
 
         arguments?.getInt("id")?.let { viewModel.setId(it) }
         viewModel.listing.observe(viewLifecycleOwner) {
