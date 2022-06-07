@@ -9,7 +9,7 @@ data class Stats(
     val id: Int = 0,
     val most_expensive_address: String,
     val least_expensive_address: String,
-    val listing_count: Int,
+    val listings_count: Int,
     val listings_price_min: Int,
     val listings_price_max: Int,
     val listings_price_avg: Int,

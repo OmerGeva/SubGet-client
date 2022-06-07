@@ -2,24 +2,17 @@ package com.example.subget.ui.home
 
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.example.subget.R
 import com.example.subget.app_data.models.Stats
-import com.example.subget.databinding.FragmentDetailsBinding
 import com.example.subget.databinding.FragmentHomeBinding
-import com.example.subget.ui.listings.ListingsViewModel
 import com.example.subget.utils.Error
 import com.example.subget.utils.Loading
 import com.example.subget.utils.Success
-
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -39,12 +32,15 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        disableBackButton()
         fetchData()
 
     }
@@ -54,24 +50,15 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 is Loading -> {
                     binding.loadingScreen.visibility = View.VISIBLE
-
-
                 }
 
                 is Success -> {
                     binding.loadingScreen.visibility = View.GONE
-                    binding.LL.visibility = View.VISIBLE
 
                     if (it.status.data != null) {
-                        binding.mostExpensive.text = it.status.data!!.listing_count.toString()
-                    } else {
-                        binding.mostExpensive.text = "null"
+                        binding.LL.visibility = View.VISIBLE
+                        setStats(it.status.data!!)
                     }
-
-
-
-
-
                 }
 
                 is Error -> {
@@ -97,5 +84,27 @@ class HomeFragment : Fragment() {
         binding.avg.text = stats.listings_price_avg.toString()
         binding.max.text = stats.listings_price_max.toString()
         binding.min.text = stats.listings_price_min.toString()
+        binding.mostExpensive.text = stats.most_expensive_address
+        binding.leastExpensive.text = stats.least_expensive_address
+        binding.count.text = stats.listings_count.toString()
+
     }
+
+    private fun disableBackButton() {
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true // default to enabled
+        ) {
+            override fun handleOnBackPressed() {
+
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,  // LifecycleOwner
+            callback
+        )
+
+    }
+
+
+
 }

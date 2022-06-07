@@ -83,9 +83,10 @@ class ListingsFragment : Fragment() {
                 }
 
                 is Success -> {
-                    binding.loadingScreen.visibility = View.GONE
-                    binding.recyclerLayout.visibility = View.VISIBLE
-                    adapter.setListings(it.status.data!!)
+                    if (it.status.data != null) {
+                        binding.loadingScreen.visibility = View.GONE
+                        binding.recyclerLayout.visibility = View.VISIBLE
+                        adapter.setListings(it.status.data!!) }
                 }
 
                 is Error -> {
