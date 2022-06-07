@@ -61,11 +61,14 @@ class HomeFragment : Fragment() {
                 is Success -> {
                     binding.loadingScreen.visibility = View.GONE
                     binding.LL.visibility = View.VISIBLE
+
                     if (it.status.data != null) {
-                        setStats(it.status.data!!)
+                        binding.mostExpensive.text = it.status.data!!.listing_count.toString()
                     } else {
-                        binding.count.text = "null"
+                        binding.mostExpensive.text = "null"
                     }
+
+
 
 
 

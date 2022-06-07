@@ -53,7 +53,6 @@ class AddListingFragment : Fragment() {
     private fun sendListing() {
         viewModel.setListing(
             Listing(
-
                 title = binding.title.text.toString(),
                 description = binding.description.text.toString(),
                 address = binding.address.text.toString(),

@@ -46,31 +46,31 @@
             android:id="@+id/most_expensive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="1" />
 
         <TextView
             android:id="@+id/least_expensive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="2" />
 
         <TextView
             android:id="@+id/count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="3" />
 
         <TextView
             android:id="@+id/min"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="4" />
 
         <TextView
             android:id="@+id/max"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="5" />
 
         <TextView
             android:id="@+id/avg"

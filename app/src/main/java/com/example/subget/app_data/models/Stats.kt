@@ -13,5 +13,5 @@ data class Stats(
     val listings_price_min: Int,
     val listings_price_max: Int,
     val listings_price_avg: Int,
-    val increase_from_last_qtr: Int
+    val increase_from_last_qtr: String
 )

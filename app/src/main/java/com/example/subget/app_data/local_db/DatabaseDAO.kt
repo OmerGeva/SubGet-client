@@ -14,12 +14,12 @@ interface DatabaseDAO {
     fun localInsertAllListings(listings: List<Listing>)
 
     // Inserts a single Listing into Listing table
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun localInsertSingleListing(listing: Listing)
 
     // Inserts a single Stats into Stats table
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun localInsertAllStats(stats: Stats)
+    fun localInsertStats(stats: Stats)
 
     // Get all Stats from Stats table
     @Query("SELECT * FROM stats LIMIT 1")
@@ -44,6 +44,10 @@ interface DatabaseDAO {
     // Get all favorite Listings which match the search result
     @Query("SELECT * FROM listings WHERE address LIKE  :location AND favorite = 1")
     fun localGetFavoritesSearchResults(location : String) : LiveData<List<Listing>>
+
+    // Updates Listing image
+    @Query("UPDATE listings SET image = :image WHERE id = :listingId")
+    fun localUpdateImage(listingId: Int, image: String)
 
     // Updates Listing favorite status
     @Query("UPDATE listings SET favorite = :favorite WHERE id = :listingId")

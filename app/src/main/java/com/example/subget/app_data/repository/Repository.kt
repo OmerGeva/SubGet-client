@@ -25,7 +25,7 @@ class Repository @Inject constructor(
     fun repoGetStats() = performGetAndSaving(
         {localDataSource.localGetStats()},
         {remoteDataSource.remoteGetStats()},
-        {localDataSource.localInsertAllStats(it)}
+        {localDataSource.localInsertStats(it)}
     )
 
     fun repoGetSingleListing(id: Int) = performGetAndSaving(
