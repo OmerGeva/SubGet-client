@@ -118,7 +118,10 @@ class DetailsFragment : Fragment() {
 
         if((sendLng != null) && (sendLat != null)) {
             findNavController().navigate(R.id.action_navigation_details_to_mapFragment,
-                bundleOf("lat" to sendLat, "lng" to sendLng, "title" to (binding.detailedTitle.text)))
+                bundleOf("lat" to sendLat,
+                    "lng" to sendLng,
+                    "title" to binding.detailedTitle.text,
+                    "address" to binding.detailedAddress.text))
         }
     }
 

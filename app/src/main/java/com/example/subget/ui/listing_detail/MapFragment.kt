@@ -33,6 +33,7 @@ class MapFragment : Fragment() {
             val lat = arguments?.getDouble("lat")
             val lng = arguments?.getDouble("lng")
             val title = arguments?.getString("title")
+            binding.addressText.text = arguments?.getString("address")
             if(lat != null && lng != null) {
                 val googlePlex = CameraPosition.builder()
                     .target(LatLng(lat, lng))
