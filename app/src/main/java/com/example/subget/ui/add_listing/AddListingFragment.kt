@@ -76,10 +76,14 @@ class AddListingFragment : Fragment() {
         viewModel.newListing.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Success -> {
-                    dialog("Successfully uploaded your Listing!", it.status.data!!.id)
-                    clearSelection()
-                    binding.logo.visibility = View.VISIBLE
-                    binding.uploadProgress.visibility = View.GONE
+                    if (it.status.data != null) {
+                        dialog("Successfully uploaded your Listing!", it.status.data!!.id)
+                        clearSelection()
+                        binding.logo.visibility = View.VISIBLE
+                        binding.uploadProgress.visibility = View.GONE
+                    }
+
+
                 }
                 is Error -> {
                     dialog("Ooops, we've encountered the following error: " + it.status.message, -1)

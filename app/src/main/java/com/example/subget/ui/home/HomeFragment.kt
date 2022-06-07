@@ -54,14 +54,11 @@ class HomeFragment : Fragment() {
 
                 is Success -> {
                     binding.loadingScreen.visibility = View.GONE
-                    binding.LL.visibility = View.VISIBLE
 
                     if (it.status.data != null) {
+                        binding.LL.visibility = View.VISIBLE
                         setStats(it.status.data!!)
-                    } else {
-                        dialog("Ooops, seems like online server is giving us problems! Please try again later")
                     }
-
                 }
 
                 is Error -> {
@@ -89,7 +86,7 @@ class HomeFragment : Fragment() {
         binding.min.text = stats.listings_price_min.toString()
         binding.mostExpensive.text = stats.most_expensive_address
         binding.leastExpensive.text = stats.least_expensive_address
-        binding.count.text = stats.listing_count.toString()
+        binding.count.text = stats.listings_count.toString()
 
     }
 

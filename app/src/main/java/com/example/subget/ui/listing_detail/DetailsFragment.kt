@@ -68,13 +68,10 @@ class DetailsFragment : Fragment() {
                 }
 
                 is Success -> {
-                    binding.loadingScreen.visibility = View.GONE
-                    binding.scrollView.visibility = View.VISIBLE
-                    binding.detailedImage.visibility = View.VISIBLE
-//                    setListing(it.status.data!!)
-                    if (it.status.data == null) {
-                        dialog("wtf")
-                    } else {
+                    if (it.status.data != null) {
+                        binding.loadingScreen.visibility = View.GONE
+                        binding.scrollView.visibility = View.VISIBLE
+                        binding.detailedImage.visibility = View.VISIBLE
                         setListing(it.status.data!!)
                     }
                 }
