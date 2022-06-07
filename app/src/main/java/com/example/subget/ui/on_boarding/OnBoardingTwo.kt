@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.example.subget.R
 import com.example.subget.databinding.FragmentOnBoardingOneBinding
 import com.example.subget.databinding.FragmentOnBoardingTwoBinding
@@ -23,6 +24,7 @@ class OnBoardingTwo : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentOnBoardingTwoBinding.inflate(inflater, container, false)
+
 
 
 
