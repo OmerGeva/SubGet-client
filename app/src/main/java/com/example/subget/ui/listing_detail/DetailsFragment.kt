@@ -50,8 +50,13 @@ class DetailsFragment : Fragment() {
 
 
         binding.heartIcon.setOnClickListener {
+
+            if (binding.heartIcon.isSelected) {
+                viewModel.viewModelDeleteFavorite()
+            } else {
+                viewModel.viewModelAddFavorite()
+            }
             binding.heartIcon.isSelected = !binding.heartIcon.isSelected
-            viewModel.viewModelUpdateFavorite()
         }
     }
 
@@ -94,7 +99,9 @@ class DetailsFragment : Fragment() {
     }
 
 
+
     private fun setListing(listing: Listing) {
+        viewModel.favorite.observe(viewLifecycleOwner) { binding.heartIcon.isSelected = it }
         binding.detailedTitle.text = listing.title
         binding.detailedAddress.text = listing.address
         binding.detailedDescription.text = listing.description
@@ -102,7 +109,7 @@ class DetailsFragment : Fragment() {
         binding.detailedPhone.text = listing.phone_number
         binding.detailedContactName.text = listing.contact_name
         binding.detailedPrice.text = "$" + listing.price.toString()
-        binding.heartIcon.isSelected = listing.favorite
+
         Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
         setIcons(listing)
     }
