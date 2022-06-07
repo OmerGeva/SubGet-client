@@ -1,5 +1,6 @@
 package com.example.subget.ui.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.subget.R
+import com.example.subget.app_data.models.Stats
 import com.example.subget.databinding.FragmentDetailsBinding
 import com.example.subget.databinding.FragmentHomeBinding
 import com.example.subget.ui.listings.ListingsViewModel
@@ -44,30 +46,56 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fetchData()
-        binding.buttonSearch.setOnClickListener {
-//            Toast.makeText(context, binding.addressSearch.text, Toast.LENGTH_SHORT).show()
 
-        }
     }
 
     private fun fetchData() {
-        viewModel.listings.observe(viewLifecycleOwner) {
+        viewModel.stats.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> {
-//                    binding.loadingBar.visibility = View.VISIBLE
-//                    binding.loadingText.visibility = View.VISIBLE
+                    binding.loadingScreen.visibility = View.VISIBLE
+
+
                 }
 
                 is Success -> {
-//                    binding.loadingBar.visibility = View.INVISIBLE
-//                    binding.loadingText.text = "SUCCESS MESSAGE"
+                    binding.loadingScreen.visibility = View.GONE
+                    binding.LL.visibility = View.VISIBLE
+
+                    if (it.status.data != null) {
+                        binding.mostExpensive.text = it.status.data!!.listing_count.toString()
+                    } else {
+                        binding.mostExpensive.text = "null"
+                    }
+
+
+
+
+
                 }
 
                 is Error -> {
-//                    binding.loadingBar.visibility = View.INVISIBLE
-//                    binding.loadingText.text = "ERROR MESSAGE"
+                    dialog("Ooops, we've encountered the following error: " + it.status.message)
                 }
             }
         }
+    }
+
+    private fun dialog(message: String) {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setMessage(message)
+        dialog.setPositiveButton("OK") { _, _ ->
+            // Do something
+        }
+        dialog.setNegativeButton("NOT OK") { dialog, _ ->
+            dialog.cancel()
+        }
+        dialog.create().show()
+    }
+
+    private fun setStats(stats: Stats) {
+        binding.avg.text = stats.listings_price_avg.toString()
+        binding.max.text = stats.listings_price_max.toString()
+        binding.min.text = stats.listings_price_min.toString()
     }
 }

@@ -4,6 +4,7 @@ import androidx.compose.runtime.snapshots.SnapshotApplyResult
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import com.example.subget.app_data.models.Listing
 import kotlinx.coroutines.Dispatchers
 
 
@@ -28,8 +29,9 @@ fun <T,A> performGetAndSaving(localDbFetch: () -> LiveData<T>,
             emitSource(source)
         }
     }
-fun <T> performPostAndSaving(remoteDbPost: suspend () -> Resource<T>,
-                             localDbSave: suspend (T) -> Unit) : LiveData<Resource<T>> =
+fun <T> performPostAndSaving(
+    remoteDbPost: suspend () -> Resource<T>,
+    localDbSave: suspend (T) -> Unit) : LiveData<Resource<T>> =
 
 
     liveData(Dispatchers.IO) {

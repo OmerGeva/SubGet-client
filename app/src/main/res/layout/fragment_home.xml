@@ -7,131 +7,78 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Welcome to SubGet! "
-            android:textColor="@color/black"
-            android:textSize="30dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Please select your desired apartment:"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
-
-
-    </LinearLayout>
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loading_screen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/usernameWrapper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:boxStrokeColor="@null"
-            app:boxBackgroundColor="@color/background_blue"
-            android:outlineSpotShadowColor="@color/white">
-
-            <EditText
-                android:id="@+id/address_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:inputType="text"
-                android:drawableLeft="@drawable/map35_2"
-                android:drawableStart="@drawable/map35_2"
-                android:background="@drawable/edit_text_background"
-                android:drawablePadding="10dp"
-                android:hint="Address"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <LinearLayout
+        <ImageView
+            android:id="@+id/loading_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:src="@drawable/subget_loading_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498" />
 
-            <CheckBox
-                android:id="@+id/pet_allowed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pets Allowed"
-                android:textSize="10dp" />
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loading_image" />
 
-            <CheckBox
-                android:id="@+id/washing_machine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Washing Machine"
-                android:textSize="10dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <CheckBox
-                android:id="@+id/wifi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="WiFi"
-                android:textSize="10dp" />
+    <LinearLayout
+        android:id="@+id/LL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/near_beach"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Near The Beach"
-                android:textSize="10dp" />
-
-
-
-
-
-        </LinearLayout>
-<!--        <ImageView-->
-<!--            android:id="@+id/heart_icon"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:src="@drawable/heart_selector"-->
-<!--            />-->
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/most_expensive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:text="1" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_search"
-                android:layout_width="250dp"
-                android:layout_height="80dp"
-                android:backgroundTint="@null"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="50dp"
-                android:layout_marginVertical="20dp"
-                android:textColor="@color/white"
-                android:textSize="24dp"
-                android:background="@drawable/rounded_corners2"
-                android:text="Search!" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/least_expensive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2" />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3" />
+
+        <TextView
+            android:id="@+id/min"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4" />
+
+        <TextView
+            android:id="@+id/max"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5" />
+
+        <TextView
+            android:id="@+id/avg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BLA" />
+
 
     </LinearLayout>
-
-
 
 </LinearLayout>

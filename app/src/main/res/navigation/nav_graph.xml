@@ -37,7 +37,7 @@
         tools:layout="@layout/fragment_details" >
         <action
             android:id="@+id/action_navigation_details_to_mapFragment"
-            app:destination="@id/mapFragment" />
+            app:destination="@id/navigation_map" />
     </fragment>
     <fragment
         android:id="@+id/navigation_addListing"
@@ -55,14 +55,14 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_navigation_splash_to_viewPagerFragment"
-            app:destination="@id/viewPagerFragment" />
+            app:destination="@id/navigation_viewpager" />
         <action
             android:id="@+id/action_navigation_splash_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
     <fragment
 
-        android:id="@+id/viewPagerFragment"
+        android:id="@+id/navigation_viewpager"
         android:name="com.example.subget.ui.view_pager2.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager">
@@ -70,8 +70,9 @@
             android:id="@+id/action_viewPagerFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+
     <fragment
-        android:id="@+id/mapFragment"
+        android:id="@+id/navigation_map"
         android:name="com.example.subget.ui.listing_detail.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />

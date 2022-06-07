@@ -1,5 +1,6 @@
 package com.example.subget.ui.listing_detail
 
+import android.app.AlertDialog
 import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +16,9 @@ import com.bumptech.glide.Glide
 import com.example.subget.R
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.FragmentDetailsBinding
+import com.example.subget.utils.Error
+import com.example.subget.utils.Loading
+import com.example.subget.utils.Success
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -35,40 +39,58 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//
 
-        binding.mapicon.setOnClickListener {
-            var sendLat: Double? = null
-            var sendLng: Double? = null
-            try {
-                val geocode = Geocoder(context, Locale.getDefault())
-                val addList = geocode.getFromLocationName(binding.detailedAddress.text.toString(),1)
-                sendLat = addList[0].latitude
-                sendLng = addList[0].longitude
+        getListing()
 
 
-            }catch (e: Exception){
-                Toast.makeText(context, "Listing isn't verified", LENGTH_SHORT).show()
-            }
-            if((sendLng != null) && (sendLat != null)) {
-                findNavController().navigate(R.id.action_navigation_details_to_mapFragment,
-                    bundleOf("lat" to sendLat, "lng" to sendLng, "title" to (viewModel.listing.value?.title)))
-            }
-        }
+        binding.mapicon.setOnClickListener { setCoordinates() }
 
         arguments?.getInt("id")?.let { viewModel.setId(it) }
-        viewModel.listing.observe(viewLifecycleOwner) {
-            if (it == null) {
-                Toast.makeText(requireContext(), "null", LENGTH_SHORT).show()
-            } else {
-                setListing(it)
-            }
-             }
+
+
 
         binding.heartIcon.setOnClickListener {
             binding.heartIcon.isSelected = !binding.heartIcon.isSelected
             viewModel.viewModelUpdateFavorite()
         }
+    }
+
+    private fun getListing() {
+        viewModel.listing.observe(viewLifecycleOwner) {
+            when (it.status) {
+                is Loading -> {
+                    binding.loadingScreen.visibility = View.VISIBLE
+                }
+
+                is Success -> {
+                    binding.loadingScreen.visibility = View.GONE
+                    binding.scrollView.visibility = View.VISIBLE
+                    binding.detailedImage.visibility = View.VISIBLE
+//                    setListing(it.status.data!!)
+                    if (it.status.data == null) {
+                        dialog("wtf")
+                    } else {
+                        setListing(it.status.data!!)
+                    }
+                }
+
+                is Error -> {
+                    dialog("Ooops, we've encountered the following error: " + it.status.message)
+                }
+            }
+        }
+    }
+
+    private fun dialog(message: String) {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setMessage(message)
+        dialog.setPositiveButton("OK") { _, _ ->
+            // Do something
+        }
+        dialog.setNegativeButton("NOT OK") { dialog, _ ->
+            dialog.cancel()
+        }
+        dialog.create().show()
     }
 
 
@@ -83,6 +105,26 @@ class DetailsFragment : Fragment() {
         binding.heartIcon.isSelected = listing.favorite
         Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
         setIcons(listing)
+    }
+
+    private fun setCoordinates() {
+
+        var sendLat: Double? = null; var sendLng: Double? = null
+        try {
+            val geocode = Geocoder(context, Locale.getDefault())
+            val addList = geocode.getFromLocationName(binding.detailedAddress.text.toString(),1)
+            sendLat = addList[0].latitude
+            sendLng = addList[0].longitude
+
+        }catch (e: Exception){
+            Toast.makeText(context, "Listing isn't verified", LENGTH_SHORT).show()
+        }
+
+
+        if((sendLng != null) && (sendLat != null)) {
+            findNavController().navigate(R.id.action_navigation_details_to_mapFragment,
+                bundleOf("lat" to sendLat, "lng" to sendLng, "title" to (binding.detailedTitle.text)))
+        }
     }
 
     private fun setIcons(listing: Listing) {

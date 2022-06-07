@@ -25,7 +25,9 @@ data class Listing(
     val price: Int,
     var image: String,
     var favorite: Boolean
-)
+) {
+
+}
 
 
 
