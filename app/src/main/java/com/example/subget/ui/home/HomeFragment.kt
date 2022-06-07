@@ -57,9 +57,9 @@ class HomeFragment : Fragment() {
                     binding.LL.visibility = View.VISIBLE
 
                     if (it.status.data != null) {
-                        binding.mostExpensive.text = it.status.data!!.listing_count.toString()
+                        setStats(it.status.data!!)
                     } else {
-                        binding.mostExpensive.text = "null"
+                        dialog("Ooops, seems like online server is giving us problems! Please try again later")
                     }
 
                 }
@@ -87,6 +87,10 @@ class HomeFragment : Fragment() {
         binding.avg.text = stats.listings_price_avg.toString()
         binding.max.text = stats.listings_price_max.toString()
         binding.min.text = stats.listings_price_min.toString()
+        binding.mostExpensive.text = stats.most_expensive_address
+        binding.leastExpensive.text = stats.least_expensive_address
+        binding.count.text = stats.listing_count.toString()
+
     }
 
     private fun disableBackButton() {
