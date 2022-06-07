@@ -1,6 +1,7 @@
 package com.example.subget.ui.listings
 
 import android.app.AlertDialog
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -90,8 +92,17 @@ class ListingsFragment : Fragment() {
                 }
 
                 is Error -> {
-                    dialog("Ooops, we've encountered the following error: " + it.status.message)
-                }
+                    val ConnectionManager = ContextCompat.getSystemService(
+                        requireContext(),
+                        ConnectivityManager::class.java
+                    ) as ConnectivityManager
+
+                    val networkInfo = ConnectionManager.activeNetworkInfo
+                    if (networkInfo == null || !networkInfo.isConnected) {
+                        dialog("Ooops, it seems like we have an error...\n Please check your internet connection and restart the app")
+                    } else{
+                        dialog("Ooops, we've encountered the following error: " + it.status.message)
+                    }                }
             }
         }
     }

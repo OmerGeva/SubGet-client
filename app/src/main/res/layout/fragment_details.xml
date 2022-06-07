@@ -196,10 +196,10 @@
 
                             tools:ignore="NestedWeights">
                             <ImageView
-                                android:layout_width="45dp"
-                                android:layout_height="50dp"
+                                android:layout_width="40dp"
+                                android:layout_height="45dp"
                                 android:padding="4dp"
-                                android:layout_gravity="end"
+                                android:layout_gravity="center"
                                 android:id="@+id/icon1"/>
                         </LinearLayout>
                         <LinearLayout
@@ -208,9 +208,10 @@
                             android:orientation="vertical"
                             >
                             <ImageView
-                                android:layout_width="45dp"
+                                android:layout_width="40dp"
                                 android:padding="4dp"
-                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_height="45dp"
                                 android:id="@+id/icon2"/>
                         </LinearLayout>
                         <LinearLayout
@@ -219,9 +220,10 @@
                             android:orientation="vertical"
                             >
                             <ImageView
-                                android:layout_width="45dp"
+                                android:layout_width="40dp"
                                 android:padding="4dp"
-                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_height="45dp"
                                 android:id="@+id/icon3"/>
                         </LinearLayout>
                         <LinearLayout
@@ -230,9 +232,10 @@
                             android:orientation="vertical"
                             >
                             <ImageView
-                                android:layout_width="45dp"
+                                android:layout_width="40dp"
                                 android:padding="4dp"
-                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_height="45dp"
                                 android:id="@+id/icon4"/>
                         </LinearLayout>
 <!--                        <LinearLayout-->
