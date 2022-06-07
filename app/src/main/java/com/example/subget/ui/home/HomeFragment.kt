@@ -81,9 +81,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun setStats(stats: Stats) {
-        binding.avg.text = stats.listings_price_avg.toString()
-        binding.max.text = stats.listings_price_max.toString()
-        binding.min.text = stats.listings_price_min.toString()
+        binding.avg.text = "$" + stats.listings_price_avg.toString()
+        binding.max.text = "$" + stats.listings_price_max.toString()
+        binding.min.text = "$" + stats.listings_price_min.toString()
         binding.mostExpensive.text = stats.most_expensive_address
         binding.leastExpensive.text = stats.least_expensive_address
         binding.count.text = stats.listings_count.toString()
