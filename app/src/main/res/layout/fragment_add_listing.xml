@@ -88,6 +88,7 @@
                     android:ems="10"
                     android:inputType="number"
                     android:hint="*Floor"
+                    android:maxLength="2"
                     android:gravity="center"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"/>
@@ -101,7 +102,8 @@
                     android:hint="*Bedrooms"
                     android:gravity="center"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp"
+                    android:maxLength="2"/>
 
             </LinearLayout>
 
@@ -120,7 +122,8 @@
                     android:hint="*Bathrooms"
                     android:gravity="center"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp"
+                    android:maxLength="2"/>
 
                 <EditText
                     android:id="@+id/price"
@@ -130,6 +133,7 @@
                     android:digits="0123456789"
                     android:inputType="phone"
                     android:hint="*Price in $"
+                    android:maxLength="5"
                     android:gravity="center"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"/>
