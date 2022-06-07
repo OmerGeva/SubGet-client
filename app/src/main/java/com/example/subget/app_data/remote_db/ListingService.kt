@@ -7,12 +7,16 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ListingService {
 
     // Request all listings from API
     @GET("listings")
     suspend fun apiGetAllListings() : Response<AllListings>
+
+    @GET("listings/{id}")
+    suspend fun apiGetSingleListing(@Path("id") id : Int) : Response<Listing>
 
     // Request all listings from API
     @GET("stats")

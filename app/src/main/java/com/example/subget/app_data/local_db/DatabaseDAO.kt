@@ -15,14 +15,14 @@ interface DatabaseDAO {
 
     // Inserts a single Listing into Listing table
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun localInsertListing(listing: Listing)
+    fun localInsertSingleListing(listing: Listing)
 
-    // Inserts all Stats into Stats table
+    // Inserts a single Stats into Stats table
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun localInsertAllStats(stats: Stats)
 
     // Get all Stats from Stats table
-    @Query("SELECT * FROM stats")
+    @Query("SELECT * FROM stats LIMIT 1")
     fun localGetStats() : LiveData<Stats>
 
     // Get all Listings from Listing table

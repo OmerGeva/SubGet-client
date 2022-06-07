@@ -11,6 +11,9 @@ class RemoteDataSource @Inject constructor(
     // Get all Listings from remote database
     suspend fun remoteGetAllListings() = getResult { listingService.apiGetAllListings() }
 
+    // Get a single Listing from remote database
+    suspend fun remoteGetSingleListing(id: Int) = getResult { listingService.apiGetSingleListing(id) }
+
     // Get all Stats from remote database
     suspend fun remoteGetStats() = getResult { listingService.apiGetStats() }
 

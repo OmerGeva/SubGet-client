@@ -1,5 +1,6 @@
 package com.example.subget.ui.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,22 +52,42 @@ class HomeFragment : Fragment() {
     private fun fetchData() {
         viewModel.stats.observe(viewLifecycleOwner) {
             when (it.status) {
-                is Loading -> { binding.count.text = it.status.toString()
+                is Loading -> {
+                    binding.loadingScreen.visibility = View.VISIBLE
+
 
                 }
 
                 is Success -> {
-                    if (it.status.data == null) { binding.count.text = "null" }
-                    else {binding.count.text = "else"}
+                    binding.loadingScreen.visibility = View.GONE
+                    binding.LL.visibility = View.VISIBLE
+                    if (it.status.data != null) {
+                        setStats(it.status.data!!)
+                    } else {
+                        binding.count.text = "null"
+                    }
+
 
 
                 }
 
-                is Error -> { binding.count.text = it.status.toString()
-
+                is Error -> {
+                    dialog("Ooops, we've encountered the following error: " + it.status.message)
                 }
             }
         }
+    }
+
+    private fun dialog(message: String) {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setMessage(message)
+        dialog.setPositiveButton("OK") { _, _ ->
+            // Do something
+        }
+        dialog.setNegativeButton("NOT OK") { dialog, _ ->
+            dialog.cancel()
+        }
+        dialog.create().show()
     }
 
     private fun setStats(stats: Stats) {

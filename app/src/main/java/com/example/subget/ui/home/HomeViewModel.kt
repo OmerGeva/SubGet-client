@@ -10,5 +10,5 @@ class HomeViewModel @Inject constructor(
     repository: Repository
 ) : ViewModel() {
 
-    val stats  = repository.repoFetchStats()
+    val stats  = repository.repoGetStats()
 }
