@@ -70,7 +70,7 @@
             android:id="@+id/action_viewPagerFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
-
+    <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.subget.ui.listing_detail.MapFragment"
         android:label="fragment_map"
