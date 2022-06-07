@@ -22,6 +22,7 @@ import com.example.subget.utils.Loading
 import com.example.subget.utils.Success
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Error
+import java.lang.Thread.sleep
 
 @AndroidEntryPoint
 class AddListingFragment : Fragment() {
@@ -40,10 +41,13 @@ class AddListingFragment : Fragment() {
         _binding = FragmentAddListingBinding.inflate(inflater, container, false)
 
         binding.submitButton.setOnClickListener {
+            binding.submitButton.isClickable = false
             if (validateInput()) {
                 sendListing(); receiveListing()
+                binding.submitButton.postDelayed({binding.submitButton.isClickable = true},2000)
             }
         }
+
 
         return binding.root
     }
@@ -109,11 +113,13 @@ class AddListingFragment : Fragment() {
                     bundleOf("id" to id))
 
             }
+
         }
         dialog.setNegativeButton("NOT OK") { dialog, _ ->
             dialog.cancel()
         }
         dialog.create().show()
+
     }
 
     private fun clearSelection() {
