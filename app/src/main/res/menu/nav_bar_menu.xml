@@ -5,22 +5,22 @@
 <!--All images are place holders, we need to decide on transparent icons-->
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/icon_home"
+        android:icon="@drawable/home_icon"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_listings"
-        android:icon="@drawable/icon_menu"
+        android:icon="@drawable/listing_icon"
         android:title="Listings" />
 
     <item
         android:id="@+id/navigation_addListing"
-        android:icon="@android:drawable/ic_menu_upload"
+        android:icon="@drawable/add_icon"
         android:title="Add" />
 
     <item
         android:id="@+id/navigation_favorites"
-        android:icon="@drawable/icon_favorites"
+        android:icon="@drawable/favorite_icon"
         android:title="@string/title_favorites" />
 
 </menu>
