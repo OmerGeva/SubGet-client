@@ -16,7 +16,6 @@ class ListingsViewModel @Inject constructor(
     val listings  = repository.repoGetListings()
 
     // Populate RecyclerView with search results
-    fun viewModelGetSearchResults(location: String) : LiveData<List<Listing>> = repository.repoGetSearchResults(location)
-
-
+    fun viewModelGetSearchResults(location: String) : LiveData<List<Listing>> =
+        repository.repoGetSearchResults(location)
 }

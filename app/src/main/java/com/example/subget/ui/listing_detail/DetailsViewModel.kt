@@ -35,13 +35,9 @@ private val repository: Repository
     }
     val listing : LiveData<Resource<Listing>> = _listing
 
-
     // Updates (ADD / REMOVE) Listings favorite status in Favorite table
     fun viewModelDeleteFavorite() = viewModelScope.launch { async(IO) {
         repository.repoDeleteFavorite(listing.value!!.status.data!!.id) } }
     fun viewModelAddFavorite() = viewModelScope.launch { async(IO) {
         repository.repoInsertSingleFavorite(Favorite(listing.value!!.status.data!!.id)) } }
-
-
-
 }

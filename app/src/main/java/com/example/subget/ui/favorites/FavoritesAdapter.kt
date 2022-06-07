@@ -26,9 +26,7 @@ class FavoritesAdapter(private val listener : FavoritesFragment) :
 
         private lateinit var listing: Listing
 
-        init {
-            itemBinding.root.setOnClickListener(this)
-        }
+        init { itemBinding.root.setOnClickListener(this) }
 
         fun bind(item: Listing) {
             this.listing = item
@@ -39,10 +37,7 @@ class FavoritesAdapter(private val listener : FavoritesFragment) :
                 .load(item.image)
                 .into(itemBinding.cardImage)
         }
-
-        override fun onClick(v: View?) {
-            listener.onListingClick(listing.id)
-        }
+        override fun onClick(v: View?) { listener.onListingClick(listing.id) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
@@ -50,13 +45,7 @@ class FavoritesAdapter(private val listener : FavoritesFragment) :
         return FavoritesViewHolder(binding,listener)
     }
 
-    override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) =
-        holder.bind(favorites[position])
-
+    override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) = holder.bind(favorites[position])
 
     override fun getItemCount() = favorites.size
-
-    interface ListingListener {
-        fun onListingClick(listingID : Int)
-    }
 }

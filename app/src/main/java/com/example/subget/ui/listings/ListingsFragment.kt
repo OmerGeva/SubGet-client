@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -66,27 +65,25 @@ class ListingsFragment : Fragment() {
     }
 
     private fun getSearchResults(searchText: String) {
-        var searchText = searchText
-        searchText = "%$searchText%"
-
-        viewModel.viewModelGetSearchResults(location = searchText).observe(viewLifecycleOwner) { adapter.setListings(it)}
+        var searchText = "%$searchText%"
+        viewModel.viewModelGetSearchResults(location = searchText).observe(viewLifecycleOwner) {
+            adapter.setListings(it)}
     }
 
     private fun createRecyclerView() {
         binding.listingRecycler.layoutManager = LinearLayoutManager(requireContext())
         adapter = ListingAdapter(this@ListingsFragment)
         binding.listingRecycler.adapter = adapter
+
         viewModel.listings.observe(viewLifecycleOwner) {
             when (it.status) {
-                is Loading -> {
-                    binding.loadingScreen.visibility = View.VISIBLE
-                }
+                is Loading -> { binding.loadingScreen.visibility = View.VISIBLE }
 
                 is Success -> {
                     if (it.status.data != null) {
                         binding.loadingScreen.visibility = View.GONE
                         binding.recyclerLayout.visibility = View.VISIBLE
-                        adapter.setListings(it.status.data!!) }
+                        adapter.setListings(it.status.data) }
                 }
 
                 is Error -> {

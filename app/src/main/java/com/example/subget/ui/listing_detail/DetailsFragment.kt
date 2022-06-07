@@ -1,7 +1,9 @@
 package com.example.subget.ui.listing_detail
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.location.Geocoder
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,12 +24,13 @@ import com.example.subget.utils.Success
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
+
     private val viewModel : DetailsViewModel by viewModels()
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,15 +43,10 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getListing()
-
-
-        binding.mapicon.setOnClickListener { setCoordinates() }
-
         arguments?.getInt("id")?.let { viewModel.setId(it) }
 
-
-
+        binding.detailedPhone.setOnClickListener { call() }
+        binding.mapicon.setOnClickListener { setCoordinates() }
         binding.heartIcon.setOnClickListener {
 
             if (binding.heartIcon.isSelected) {
@@ -58,21 +56,20 @@ class DetailsFragment : Fragment() {
             }
             binding.heartIcon.isSelected = !binding.heartIcon.isSelected
         }
+        getListing()
     }
 
     private fun getListing() {
         viewModel.listing.observe(viewLifecycleOwner) {
             when (it.status) {
-                is Loading -> {
-                    binding.loadingScreen.visibility = View.VISIBLE
-                }
+                is Loading -> { binding.loadingScreen.visibility = View.VISIBLE }
 
                 is Success -> {
                     if (it.status.data != null) {
                         binding.loadingScreen.visibility = View.GONE
                         binding.scrollView.visibility = View.VISIBLE
                         binding.detailedImage.visibility = View.VISIBLE
-                        setListing(it.status.data!!)
+                        setListing(it.status.data)
                     }
                 }
 
@@ -89,13 +86,9 @@ class DetailsFragment : Fragment() {
         dialog.setPositiveButton("OK") { _, _ ->
             // Do something
         }
-        dialog.setNegativeButton("NOT OK") { dialog, _ ->
-            dialog.cancel()
-        }
+        dialog.setNegativeButton("NOT OK") { dialog, _ -> dialog.cancel() }
         dialog.create().show()
     }
-
-
 
     private fun setListing(listing: Listing) {
         viewModel.favorite.observe(viewLifecycleOwner) { binding.heartIcon.isSelected = it }
@@ -112,7 +105,6 @@ class DetailsFragment : Fragment() {
     }
 
     private fun setCoordinates() {
-
         var sendLat: Double? = null; var sendLng: Double? = null
         try {
             val geocode = Geocoder(context, Locale.getDefault())
@@ -124,7 +116,6 @@ class DetailsFragment : Fragment() {
             Toast.makeText(context, "Listing isn't verified", LENGTH_SHORT).show()
         }
 
-
         if((sendLng != null) && (sendLat != null)) {
             findNavController().navigate(R.id.action_navigation_details_to_mapFragment,
                 bundleOf("lat" to sendLat, "lng" to sendLng, "title" to (binding.detailedTitle.text)))
@@ -132,19 +123,23 @@ class DetailsFragment : Fragment() {
     }
 
     private fun setIcons(listing: Listing) {
-        val icons = "icon1"
-
         if(listing.washing_machine) {
-            binding.icon1.setImageDrawable(resources.getDrawable(R.drawable.washing_machine))
+            binding.icon1.setImageResource(R.drawable.washing_machine)
         }
         if(listing.pet_allowed) {
-            binding.icon2.setImageDrawable(resources.getDrawable(R.drawable.pets_icon))
+            binding.icon2.setImageResource(R.drawable.pets_icon)
         }
         if(listing.wifi) {
-            binding.icon3.setImageDrawable(resources.getDrawable(R.drawable.wifi_icon))
+            binding.icon3.setImageResource(R.drawable.wifi_icon)
         }
         if(listing.near_beach) {
-            binding.icon4.setImageDrawable(resources.getDrawable(R.drawable.beach))
+            binding.icon4.setImageResource(R.drawable.beach)
         }
+    }
+
+    private fun call() {
+        val phoneNumber = binding.detailedPhone.text.toString()
+        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null))
+        startActivity(intent)
     }
 }

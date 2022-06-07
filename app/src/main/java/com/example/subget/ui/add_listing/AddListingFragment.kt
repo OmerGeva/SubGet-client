@@ -1,10 +1,8 @@
 package com.example.subget.ui.add_listing
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +14,6 @@ import androidx.room.ColumnInfo.INTEGER
 import com.example.subget.R
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.FragmentAddListingBinding
-import com.example.subget.utils.Constants
 import com.example.subget.utils.Constants.Companion.PLACE_HOLDER_IMAGE
 import com.example.subget.utils.Loading
 import com.example.subget.utils.Success
@@ -48,8 +45,6 @@ class AddListingFragment : Fragment() {
         return binding.root
     }
 
-    var tempID = INTEGER
-
     private fun sendListing() {
         viewModel.setListing(
             Listing(
@@ -66,8 +61,7 @@ class AddListingFragment : Fragment() {
                 floor = Integer.parseInt(binding.floor.text.toString()),
                 price = Integer.parseInt(binding.price.text.toString()),
                 bathrooms = Integer.parseInt(binding.bathrooms.text.toString()),
-                image = PLACE_HOLDER_IMAGE,
-                favorite = false
+                image = PLACE_HOLDER_IMAGE
             )
         )
     }
@@ -77,19 +71,17 @@ class AddListingFragment : Fragment() {
             when (it.status) {
                 is Success -> {
                     if (it.status.data != null) {
-                        dialog("Successfully uploaded your Listing!", it.status.data!!.id)
+                        dialog("Successfully uploaded your Listing!", it.status.data.id)
                         clearSelection()
                         binding.logo.visibility = View.VISIBLE
                         binding.uploadProgress.visibility = View.GONE
                     }
-
-
                 }
+
                 is Error -> {
                     dialog("Ooops, we've encountered the following error: " + it.status.message, -1)
                     binding.logo.visibility = View.VISIBLE
                     binding.uploadProgress.visibility = View.GONE
-
                 }
 
                 is Loading -> {
@@ -117,15 +109,15 @@ class AddListingFragment : Fragment() {
     }
 
     private fun clearSelection() {
-        binding.title.text.clear();
-        binding.description.text.clear();
-        binding.address.text.clear();
-        binding.phoneNumber.text.clear();
-        binding.contactName.text.clear();
-        binding.bathrooms.text.clear();
-        binding.floor.text.clear();
-        binding.price.text.clear();
-        binding.bedrooms.text.clear();
+        binding.title.text.clear()
+        binding.description.text.clear()
+        binding.address.text.clear()
+        binding.phoneNumber.text.clear()
+        binding.contactName.text.clear()
+        binding.bathrooms.text.clear()
+        binding.floor.text.clear()
+        binding.price.text.clear()
+        binding.bedrooms.text.clear()
         binding.petAllowed.isChecked = false
         binding.wifi.isChecked = false
         binding.nearBeach.isChecked = false

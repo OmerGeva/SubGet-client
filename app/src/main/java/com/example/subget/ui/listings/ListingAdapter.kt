@@ -3,12 +3,10 @@ package com.example.subget.ui.listings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.CardLayoutBinding
-import com.example.subget.ui.favorites.FavoritesFragment
 
 class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adapter<ListingAdapter.ListingViewHolder>() {
 
@@ -18,10 +16,6 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
         this.listings.clear()
         this.listings.addAll(listings)
         notifyDataSetChanged()
-    }
-
-    interface ListingListener {
-        fun onItemClicked(index: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -36,7 +30,6 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
     override fun onBindViewHolder(holder: ListingViewHolder, position: Int) =
         holder.bind(listings[position])
 
-
     override fun getItemCount() = listings.size
 
     inner class ListingViewHolder(private val binding: CardLayoutBinding) :
@@ -45,9 +38,7 @@ class ListingAdapter(private val callback: ListingsFragment) : RecyclerView.Adap
 
         private lateinit var listing: Listing
 
-        init {
-            binding.root.setOnClickListener(this)
-        }
+        init { binding.root.setOnClickListener(this) }
 
         fun bind(listing: Listing) {
             this.listing = listing

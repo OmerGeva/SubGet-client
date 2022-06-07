@@ -9,7 +9,6 @@ class Resource<out T> private constructor(val status: Status<T>){
     }
 }
 
-
 sealed class Status<out T>(val data : T?  = null)
 
 class Success<T>(data: T) : Status<T>(data)

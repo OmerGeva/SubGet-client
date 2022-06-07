@@ -28,7 +28,6 @@ class FavoritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         activity?.setActionBar(activity?.findViewById(R.id.toolbar))
         binding.toolbarSearch.toolbar.visibility = View.VISIBLE
@@ -37,35 +36,28 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         createRecyclerView()
         getSearchResults()
-
     }
-
 
     private fun getSearchResults() {
         binding.toolbarSearch.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    getItemsFromDb(query)
-                }
+                if (query != null) { getItemsFromDb(query) }
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null) {
-                    getItemsFromDb(newText)
-                }
+                if (newText != null) { getItemsFromDb(newText) }
                 return true
             }
         })
     }
 
     private fun getItemsFromDb(searchText: String) {
-        var searchText = searchText
-        searchText = "%$searchText%"
-        viewModel.viewModelGetFavoritesSearchResults(location = searchText).observe(viewLifecycleOwner) { adapter.setFavorites(it)}
+        var searchText = "%$searchText%"
+        viewModel.viewModelGetFavoritesSearchResults(location = searchText)
+            .observe(viewLifecycleOwner) { adapter.setFavorites(it)}
     }
 
     private fun createRecyclerView() {
