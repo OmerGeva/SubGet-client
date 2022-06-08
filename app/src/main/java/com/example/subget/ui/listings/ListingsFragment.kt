@@ -1,23 +1,19 @@
 package com.example.subget.ui.listings
 
-import android.app.AlertDialog
-import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.subget.R
 import com.example.subget.databinding.FragmentListingsBinding
-import com.example.subget.utils.Error
-import com.example.subget.utils.Loading
-import com.example.subget.utils.Success
+import com.example.subget.utils.*
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,9 +46,13 @@ class ListingsFragment : Fragment() {
         adapter = ListingAdapter(this@ListingsFragment)
         binding.listingRecycler.adapter = adapter
 
-        // if offline
+        val hasConnection = requireActivity().internetEnabled()
+
+        if (hasConnection) { getOnlineListings() }
+        else { getOfflineListings() }
+
         getSearchResults()
-        getOnlineListings()
+
 
     }
 
@@ -87,39 +87,32 @@ class ListingsFragment : Fragment() {
                     if (it.status.data != null) {
                         binding.loadingScreen.visibility = View.GONE
                         binding.recyclerLayout.visibility = View.VISIBLE
-                        adapter.setListings(it.status.data) }
+                        adapter.setListings(it.status.data)
+                    }
                 }
 
                 is Error -> {
-                    val ConnectionManager = ContextCompat.getSystemService(
-                        requireContext(),
-                        ConnectivityManager::class.java
-                    ) as ConnectivityManager
-
-                    val networkInfo = ConnectionManager.activeNetworkInfo
-                    if (networkInfo == null || !networkInfo.isConnected) {
-                        dialog("Ooops, it seems like we have an error...\n Please check your internet connection and restart the app")
-                    } else{
-                        dialog("Ooops, we've encountered the following error: " + it.status.message)
-                    }                }
+                    requireActivity().dialog(getString(R.string.error_dialog)
+                            + it.status.message + getString(R.string.error_dialog_cont))
+                }
             }
         }
     }
 
     private fun getOfflineListings() {
-        viewModel.offlineListings.observe(viewLifecycleOwner) { adapter.setListings(it) }
-    }
-
-    private fun dialog(message: String) {
-        val dialog = AlertDialog.Builder(requireContext())
-        dialog.setMessage(message)
-        dialog.setPositiveButton("OK") { _, _ ->
-            // Do something
+        viewModel.offlineListings.observe(viewLifecycleOwner) {
+            if (!it.isNullOrEmpty()) {
+                binding.recyclerLayout.visibility = View.VISIBLE
+                adapter.setListings(it)
+            } else {
+                binding.recyclerLayout.visibility = View.VISIBLE
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.null_message),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
-        dialog.setNegativeButton("NOT OK") { dialog, _ ->
-            dialog.cancel()
-        }
-        dialog.create().show()
     }
 
     fun onItemClicked(listingID : Int) {

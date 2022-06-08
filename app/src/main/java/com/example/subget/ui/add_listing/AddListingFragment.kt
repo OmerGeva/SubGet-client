@@ -1,32 +1,25 @@
 package com.example.subget.ui.add_listing
 
 import android.app.AlertDialog
-import android.content.Context
-import android.content.Context.CONNECTIVITY_SERVICE
-import android.net.ConnectivityManager
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.room.ColumnInfo.INTEGER
 import com.example.subget.R
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.FragmentAddListingBinding
 import com.example.subget.utils.Constants.Companion.PLACE_HOLDER_IMAGE
 import com.example.subget.utils.Loading
 import com.example.subget.utils.Success
+import com.example.subget.utils.dialog
+import com.example.subget.utils.internetEnabled
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Error
-import java.lang.Thread.sleep
 
 @AndroidEntryPoint
 class AddListingFragment : Fragment() {
@@ -44,16 +37,24 @@ class AddListingFragment : Fragment() {
 
         _binding = FragmentAddListingBinding.inflate(inflater, container, false)
 
-        binding.submitButton.setOnClickListener {
-            binding.submitButton.isClickable = false
-            if (validateInput()) {
-                sendListing(); receiveListing()
-                binding.submitButton.postDelayed({binding.submitButton.isClickable = true},2000)
-            }
-        }
-
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val hasConnection = requireActivity().internetEnabled()
+
+
+        binding.submitButton.setOnClickListener {
+            if (hasConnection) {
+                binding.submitButton.isClickable = false
+                if (validateInput()) {
+                    sendListing(); receiveListing()
+                    binding.submitButton.postDelayed({binding.submitButton.isClickable = true},2000)
+                }
+            } else { requireActivity().dialog(getString(R.string.internet_connection)) }
+        }
     }
 
     private fun sendListing() {
@@ -80,9 +81,14 @@ class AddListingFragment : Fragment() {
     private fun receiveListing() {
         viewModel.newListing.observe(viewLifecycleOwner) {
             when (it.status) {
+                is Loading -> {
+                    binding.logo.visibility = View.GONE
+                    binding.uploadProgress.visibility = View.VISIBLE
+                }
+
                 is Success -> {
                     if (it.status.data != null) {
-                        dialog("Successfully uploaded your Listing!", it.status.data.id)
+                        dialogRedirect(getString(R.string.success), it.status.data.id)
                         clearSelection()
                         binding.logo.visibility = View.VISIBLE
                         binding.uploadProgress.visibility = View.GONE
@@ -90,45 +96,23 @@ class AddListingFragment : Fragment() {
                 }
 
                 is Error -> {
-                    dialog("Ooops, we've encountered the following error: " + it.status.message, -1)
+                    requireActivity().dialog(getString(R.string.error_dialog)
+                            + it.status.message + getString(R.string.error_dialog_cont))
                     binding.logo.visibility = View.VISIBLE
                     binding.uploadProgress.visibility = View.GONE
-                }
-
-                is Loading -> {
-                    binding.logo.visibility = View.GONE
-                    binding.uploadProgress.visibility = View.VISIBLE
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        val ConnectionManager = getSystemService(requireContext(),ConnectivityManager::class.java) as ConnectivityManager
-
-                        val networkInfo = ConnectionManager.activeNetworkInfo
-                        if (networkInfo == null || !networkInfo.isConnected) {
-                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_LONG).show()
-                        }
-                    },3500)
-
                 }
             }
         }
     }
 
-
-    private fun dialog(message: String, id: Int) {
+    private fun dialogRedirect(message: String, id: Int) {
         val dialog = AlertDialog.Builder(requireContext())
         dialog.setMessage(message)
-        dialog.setPositiveButton("OK") { _, _ ->
-            if (id != -1) {
-                findNavController().navigate(R.id.action_addListings_to_detailedListing,
-                    bundleOf("id" to id))
-
-            }
-
-        }
-        dialog.setNegativeButton("NOT OK") { dialog, _ ->
+        dialog.setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+            findNavController().navigate(R.id.action_addListings_to_detailedListing, bundleOf("id" to id))
             dialog.cancel()
         }
         dialog.create().show()
-
     }
 
     private fun clearSelection() {
@@ -147,41 +131,40 @@ class AddListingFragment : Fragment() {
         binding.washingMachine.isChecked = false
     }
 
-
     private fun validateInput(): Boolean {
 
         var inputApproved = true
 
         if (TextUtils.isEmpty(binding.title.text.toString())) {
-            binding.title.error = "Must fill in title!"
+            binding.title.error = getString(R.string.fill_title)
             inputApproved = false
         }
         if (TextUtils.isEmpty(binding.description.text.toString())) {
-            binding.description.error = "Must fill in description!"
+            binding.description.error = getString(R.string.fill_description)
             inputApproved = false
         }
         if (TextUtils.isEmpty(binding.address.text.toString())) {
-            binding.address.error = "Must fill in address!"
+            binding.address.error = getString(R.string.fill_address)
             inputApproved = false
         }
         if (TextUtils.isEmpty(binding.floor.text.toString())) {
-            binding.floor.error = "Must fill in this option!"
+            binding.floor.error = getString(R.string.fill_floor)
             inputApproved = false
         }
         if (TextUtils.isEmpty(binding.bathrooms.text.toString())) {
-            binding.bathrooms.error = "Must fill in this option!"
+            binding.bathrooms.error = getString(R.string.fill_bathroom)
             inputApproved = false
         }
         if (TextUtils.isEmpty(binding.price.text.toString())) {
-            binding.price.error = "Must fill in price!"
+            binding.price.error = getString(R.string.fill_price)
             inputApproved = false
         }
         if (TextUtils.isEmpty(binding.contactName.text.toString())) {
-            binding.contactName.error = "Must fill in name!"
+            binding.contactName.error = getString(R.string.fill_contact)
             inputApproved = false
         }
         if (TextUtils.isEmpty(binding.phoneNumber.text.toString())) {
-            binding.phoneNumber.error = "Must fill in phone number!"
+            binding.phoneNumber.error = getString(R.string.fill_phone)
             inputApproved = false
         }
 

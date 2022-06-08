@@ -57,7 +57,22 @@
     <string name="onboard_second">Looking to lease it?"</string>
     <string name="onboard_third">Upload your listing to SubGet and get great exposure!</string>
     <string name="onboard_fourth">FINISH</string>
-
+    <string name="internet_connection">This feature is only available with an internet connection! Please enable internet connection and restart the app!</string>
+    <string name="null_message">Something went wrong! Please check your internet connection and restart the app</string>
+    <string name="error_dialog">\"Ooops, we\'ve encountered the following error: \"</string>
+    <string name="error_dialog_cont">. Please try again later!</string>
+    <string name="success">Successfully uploaded your Listing!</string>
+    <string name="fill_title">Must fill in title!</string>
+    <string name="fill_description">Must fill in description!</string>
+    <string name="fill_address">Must fill in address!</string>
+    <string name="fill_floor">Must fill in this option!</string>
+    <string name="fill_bathroom">Must fill in this option!</string>
+    <string name="fill_price">Must fill in price!</string>
+    <string name="fill_contact">Must fill in name!</string>
+    <string name="fill_phone">Must fill in phone number!</string>
+    <string name="ok">OK</string>
+    <string name="dollar">$</string>
+    <string name="error_map">Couldn\'t find the address on the map!</string>
 
 
 </resources>

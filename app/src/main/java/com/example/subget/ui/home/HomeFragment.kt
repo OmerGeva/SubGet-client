@@ -11,11 +11,10 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.subget.R
 import com.example.subget.app_data.models.Stats
 import com.example.subget.databinding.FragmentHomeBinding
-import com.example.subget.utils.Error
-import com.example.subget.utils.Loading
-import com.example.subget.utils.Success
+import com.example.subget.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -34,17 +33,17 @@ class HomeFragment : Fragment() {
     ): View? {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-
-
+        disableBackButton()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        disableBackButton()
-        getOnlineStats()
+        val hasConnection = requireActivity().internetEnabled()
+
+        if (hasConnection) { getOnlineStats() }
+        else { getOfflineStats() }
 
     }
 
@@ -56,32 +55,30 @@ class HomeFragment : Fragment() {
                 is Success -> {
                     binding.loadingScreen.visibility = View.GONE
                     if (it.status.data != null) {
-                        binding.LL.visibility = View.VISIBLE
+                        binding.dataDisplay.visibility = View.VISIBLE
                         setStats(it.status.data)
                     }
                 }
 
                 is Error -> {
-                    val ConnectionManager = ContextCompat.getSystemService(
-                        requireContext(),
-                        ConnectivityManager::class.java
-                    ) as ConnectivityManager
-
-                    val networkInfo = ConnectionManager.activeNetworkInfo
-                    if (networkInfo == null || !networkInfo.isConnected) {
-                        dialog("Ooops, it seems like we have an error...\n Please check your internet connection and restart the app")
-                    } else{
-                        dialog("Ooops, we've encountered the following error: " + it.status.message)
-                    }
-
-
+                    requireActivity().dialog(getString(R.string.error_dialog)
+                            + it.status.message + getString(R.string.error_dialog_cont))
                 }
             }
         }
     }
 
     private fun getOfflineStats() {
-        viewModel.offlineStats.observe(viewLifecycleOwner) { setStats(it) }
+        viewModel.offlineStats.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.dataDisplay.visibility = View.VISIBLE
+                setStats(it)
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.null_message),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun dialog(message: String) {

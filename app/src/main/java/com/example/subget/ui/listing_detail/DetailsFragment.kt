@@ -1,17 +1,14 @@
 package com.example.subget.ui.listing_detail
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.location.Geocoder
 import android.net.Uri
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,9 +17,7 @@ import com.bumptech.glide.Glide
 import com.example.subget.R
 import com.example.subget.app_data.models.Listing
 import com.example.subget.databinding.FragmentDetailsBinding
-import com.example.subget.utils.Error
-import com.example.subget.utils.Loading
-import com.example.subget.utils.Success
+import com.example.subget.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -45,14 +40,18 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        val hasConnection = requireActivity().internetEnabled()
 
         arguments?.getInt("id")?.let { viewModel.setId(it) }
 
-        // check if offline or not
-        binding.mapicon.setOnClickListener { setCoordinates() }
-        getListing()
 
+        binding.mapicon.setOnClickListener {
+            if (hasConnection) { setCoordinates() }
+            else { requireActivity().dialog(getString(R.string.internet_connection)) }
+        }
+
+        if (hasConnection) { getOnlineListing() }
+        else { getOfflineListing() }
 
         binding.detailedPhone.setOnClickListener { call() }
         binding.heartIcon.setOnClickListener {
@@ -64,10 +63,9 @@ class DetailsFragment : Fragment() {
             }
             binding.heartIcon.isSelected = !binding.heartIcon.isSelected
         }
-
     }
 
-    private fun getListing() {
+    private fun getOnlineListing() {
         viewModel.listing.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> { binding.loadingScreen.visibility = View.VISIBLE }
@@ -82,30 +80,24 @@ class DetailsFragment : Fragment() {
                 }
 
                 is Error -> {
-                    val ConnectionManager = ContextCompat.getSystemService(
-                        requireContext(),
-                        ConnectivityManager::class.java
-                    ) as ConnectivityManager
-
-                    val networkInfo = ConnectionManager.activeNetworkInfo
-                    if (networkInfo == null || !networkInfo.isConnected) {
-                        dialog("Ooops, it seems like we have an error...\n Please check your internet connection and restart the app")
-                    } else{
-                        dialog("Ooops, we've encountered the following error: " + it.status.message)
-                    }
+                        requireActivity().dialog(getString(R.string.error_dialog)
+                                + it.status.message + getString(R.string.error_dialog_cont))
                 }
             }
         }
     }
 
-    private fun dialog(message: String) {
-        val dialog = AlertDialog.Builder(requireContext())
-        dialog.setMessage(message)
-        dialog.setPositiveButton("OK") { _, _ ->
-            // Do something
+    private fun getOfflineListing() {
+        viewModel.offlineListing.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.scrollView.visibility = View.VISIBLE
+                binding.detailedImage.visibility = View.VISIBLE
+                setListing(it)
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.null_message), LENGTH_SHORT)
+                    .show()
+            }
         }
-        dialog.setNegativeButton("NOT OK") { dialog, _ -> dialog.cancel() }
-        dialog.create().show()
     }
 
     private fun setListing(listing: Listing) {
@@ -116,7 +108,7 @@ class DetailsFragment : Fragment() {
         binding.detailedNumOfRooms.text = listing.bedrooms.toString()
         binding.detailedPhone.text = listing.phone_number
         binding.detailedContactName.text = listing.contact_name
-        binding.detailedPrice.text = "$" + listing.price.toString()
+        binding.detailedPrice.text = getString(R.string.dollar) + listing.price.toString()
 
         Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
         setIcons(listing)
@@ -131,7 +123,7 @@ class DetailsFragment : Fragment() {
             sendLng = addList[0].longitude
 
         }catch (e: Exception){
-            Toast.makeText(context, "Listing isn't verified", LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.error_map), LENGTH_SHORT).show()
         }
 
         if((sendLng != null) && (sendLat != null)) {
