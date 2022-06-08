@@ -91,6 +91,7 @@ class DetailsFragment : Fragment() {
                         requireActivity().dialog(getString(R.string.error_dialog)
                                 + it.status.message + getString(R.string.error_dialog_cont))
                     binding.loadingScreen.visibility = View.GONE
+                    binding.scrollView.visibility = View.GONE
                     binding.error.visibility = View.VISIBLE
                 }
             }
