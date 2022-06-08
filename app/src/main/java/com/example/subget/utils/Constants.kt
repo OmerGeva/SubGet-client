@@ -4,6 +4,6 @@ class Constants {
 
     companion object {
         const val BASE_URL = "https://subget-api.herokuapp.com/"
-        const val PLACE_HOLDER_IMAGE = "https://images.unsplash.com/photo-1460317442991-0ec209397118?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMzQwNjB8MHwxfHNlYXJjaHw0fHxhcGFydG1lbnR8ZW58MHx8fHwxNjU0MjUxMDYx&ixlib=rb-1.2.1&q=80&w=1080"
+        const val PLACE_HOLDER_IMAGE = "https://images.unsplash.com/photo-1515263487990-61b07816b324?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMzQwNjB8MHwxfHNlYXJjaHwyfHxhcGFydG1lbnR8ZW58MHx8fHwxNjU0NDk3MTg5&ixlib=rb-1.2.1&q=80&w=1080"
     }
 }

@@ -21,7 +21,7 @@ interface DatabaseDAO {
     fun localInsertSingleListing(listing: Listing)
 
     // Get all Listings from Listing table
-    @Query("SELECT * FROM listings ORDER BY price ASC")
+    @Query("SELECT * FROM listings")
     fun localGetAllListings(): LiveData<List<Listing>>
 
     // Get a single Listing from Listing table
@@ -29,7 +29,7 @@ interface DatabaseDAO {
     fun localGetSingleListing(id: Int): LiveData<Listing>
 
     // Get all Listings which match the search result from Listing table
-    @Query("SELECT * FROM listings WHERE address LIKE  :location ORDER BY price ASC")
+    @Query("SELECT * FROM listings WHERE address LIKE  :location")
     fun localGetSearchResults(location : String) : LiveData<List<Listing>>
 
 
@@ -65,10 +65,10 @@ interface DatabaseDAO {
     // INNER JOIN Operations
 
     // Get all Listings which are classified as favorites from Listing table
-    @Query("SELECT * FROM listings INNER JOIN favorites ON favorites.listingID = listings.id ORDER BY price ASC")
+    @Query("SELECT * FROM listings INNER JOIN favorites ON favorites.listingID = listings.id")
     fun localGetFavorites(): LiveData<List<Listing>>
 
     // Get all Listings which are classified as favorites and match search results from Listing table
-    @Query("SELECT * FROM listings INNER JOIN favorites ON favorites.listingID = listings.id WHERE address LIKE  :location ORDER BY price ASC")
+    @Query("SELECT * FROM listings INNER JOIN favorites ON favorites.listingID = listings.id WHERE address LIKE  :location")
     fun localGetFavoritesSearchResults(location : String) : LiveData<List<Listing>>
 }
