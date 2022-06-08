@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import com.example.subget.databinding.FragmentViewPagerBinding
 import com.example.subget.ui.on_boarding.OnBoardingOne
 import com.example.subget.ui.on_boarding.OnBoardingTwo
