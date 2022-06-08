@@ -2,11 +2,14 @@ package com.example.subget.ui.add_listing
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -54,8 +57,8 @@ class AddListingFragment : Fragment() {
                 binding.submitButton.isClickable = false
                 if (validateInput()) {
                     sendListing(); receiveListing()
-//                    binding.submitButton.postDelayed({binding.submitButton.isClickable = true},2000)
-                }
+                    binding.submitButton.postDelayed({binding.submitButton.isClickable = true},3000)
+                } else { binding.submitButton.isClickable = true }
             } else { requireActivity().dialog(getString(R.string.internet_connection)) }
         }
     }
@@ -93,6 +96,7 @@ class AddListingFragment : Fragment() {
 
                 is Success -> {
                     if (it.status.data != null) {
+                        binding.submitButton.isClickable = true
                         dialogRedirect(getString(R.string.success), it.status.data.id)
                         clearSelection()
                         binding.logo.visibility = View.VISIBLE
@@ -103,6 +107,7 @@ class AddListingFragment : Fragment() {
                 is Error -> {
                     requireActivity().dialog(getString(R.string.error_dialog)
                             + it.status.message + getString(R.string.error_dialog_cont))
+
                     binding.logo.visibility = View.VISIBLE
                     binding.uploadProgress.visibility = View.GONE
                 }
@@ -116,7 +121,6 @@ class AddListingFragment : Fragment() {
         dialog.setMessage(message)
         dialog.setPositiveButton(getString(R.string.ok)) { dialog, _ ->
             findNavController().navigate(R.id.action_addListings_to_detailedListing, bundleOf("id" to id))
-            binding.submitButton.isClickable = true
             dialog.cancel()
         }
         dialog.create().show()

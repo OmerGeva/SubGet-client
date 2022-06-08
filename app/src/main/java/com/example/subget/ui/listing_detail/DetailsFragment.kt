@@ -90,6 +90,8 @@ class DetailsFragment : Fragment() {
                 is Error -> {
                         requireActivity().dialog(getString(R.string.error_dialog)
                                 + it.status.message + getString(R.string.error_dialog_cont))
+                    binding.loadingScreen.visibility = View.GONE
+                    binding.error.visibility = View.VISIBLE
                 }
             }
         }
