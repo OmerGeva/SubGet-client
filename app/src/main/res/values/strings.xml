@@ -73,6 +73,16 @@
     <string name="ok">OK</string>
     <string name="dollar">$</string>
     <string name="error_map">Couldn\'t find the address on the map!</string>
+    <string name="todo">TODO</string>
+    <string name="couldn_t_display_the_new_listing_please_try_again_later">Couldn\'t display the new listing.. Please try again later!</string>
+    <string name="rooms_number">Rooms Number</string>
+    <string name="contact">Contact</string>
+    <string name="price">Price</string>
+    <string name="title">Title</string>
+    <string name="about_the_flat">About the flat</string>
+    <string name="that_is_my_description">That is my description</string>
+    <string name="address">Address</string>
+    <string name="phone_number_goes_here">Phone number goes here</string>
 
 
 </resources>
