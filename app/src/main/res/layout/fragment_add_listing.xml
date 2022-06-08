@@ -23,7 +23,7 @@
                 android:paddingLeft="20dp"
                 android:textColor="@color/white"
                 android:text="@string/upload_add_listing"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:paddingBottom="10dp"
@@ -33,15 +33,15 @@
                 android:id="@+id/general_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="@string/upload_info"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:paddingTop="10dp"
                 android:background="@color/background_blue_light"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:text="@string/upload_info"
+                android:textColor="#455A64"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/title"
@@ -52,18 +52,21 @@
                 android:hint="@string/upload_title"
                 android:gravity="center"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp"/>
+                android:paddingTop="10dp"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:lines="3"
-                android:inputType="textMultiLine"
                 android:hint="@string/upload_description"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp"/>
+                android:textColorHint="#757575"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/address"
@@ -74,7 +77,8 @@
                 android:hint="@string/upload_address"
                 android:gravity="center"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp"/>
+                android:paddingTop="10dp"
+                android:autofillHints="" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -84,26 +88,29 @@
                 <EditText
                     android:id="@+id/floor"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:ems="10"
                     android:inputType="number"
                     android:hint="@string/upload_floor"
                     android:maxLength="2"
                     android:gravity="center"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp"
+                    android:autofillHints="" />
 
                 <EditText
                     android:id="@+id/bedrooms"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:ems="10"
-                    android:inputType="number"
-                    android:hint="@string/upload_bedrooms"
                     android:gravity="center"
-                    android:paddingBottom="10dp"
+                    android:hint="@string/upload_bedrooms"
+                    android:inputType="number"
+                    android:maxLength="2"
                     android:paddingTop="10dp"
-                    android:maxLength="2"/>
+                    android:paddingBottom="10dp"
+                    android:textColorHint="#757575"
+                    android:autofillHints="" />
 
             </LinearLayout>
 
@@ -116,27 +123,30 @@
                 <EditText
                     android:id="@+id/bathrooms"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:ems="10"
                     android:inputType="number"
                     android:hint="@string/upload_bathrooms"
                     android:gravity="center"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
-                    android:maxLength="2"/>
+                    android:maxLength="2"
+                    android:autofillHints="" />
 
                 <EditText
                     android:id="@+id/price"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:layout_height="48dp"
                     android:digits="0123456789"
-                    android:inputType="phone"
-                    android:hint="@string/upload_price"
-                    android:maxLength="5"
+                    android:ems="10"
                     android:gravity="center"
+                    android:hint="@string/upload_price"
+                    android:inputType="phone"
+                    android:maxLength="5"
+                    android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:textColorHint="#757575"
+                    android:autofillHints="" />
 
             </LinearLayout>
 
@@ -151,7 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/upload_pets"
-                    android:textSize="10dp"
+                    android:textSize="11sp"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"/>
 
@@ -160,7 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/upload_washing_machine"
-                    android:textSize="10dp"
+                    android:textSize="11sp"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"/>
 
@@ -169,7 +179,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/upload_wifi"
-                    android:textSize="10dp"
+                    android:textSize="11sp"
                     android:paddingEnd="20dp"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"/>
@@ -179,12 +189,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/upload_near_beach"
-                    android:textSize="10dp"
+                    android:textSize="11sp"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"/>
 
             </LinearLayout>
-
 
 
             <TextView
@@ -192,15 +201,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background_blue_light"
-                android:paddingLeft="20dp"
-                android:textColor="@color/white"
-                android:text="@string/upload_contact_info"
-                android:textSize="20dp"
                 android:gravity="center"
+                android:paddingLeft="20dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textStyle="bold"
-                />
+                android:text="@string/upload_contact_info"
+                android:textColor="#455A64"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -210,24 +218,27 @@
                 <EditText
                     android:id="@+id/contact_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:hint="@string/upload_full_name"
                     android:gravity="center"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp"
+                    android:autofillHints="" />
 
                 <EditText
                     android:id="@+id/phone_number"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:ems="10"
-                    android:inputType="phone"
-                    android:hint="@string/upload_phone_number"
                     android:gravity="center"
+                    android:hint="@string/upload_phone_number"
+                    android:inputType="phone"
+                    android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:textColorHint="#757575"
+                    android:autofillHints="" />
 
             </LinearLayout>
 
@@ -242,18 +253,19 @@
                     android:id="@+id/submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/upload_submit"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
+                    android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:text="@string/upload_submit"
+                    android:textColor="#757575"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:text="@string/upload_notice"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:gravity="center"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
@@ -266,7 +278,8 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/subget_logo"
                     android:paddingBottom="40dp"
-                    android:visibility="visible"/>
+                    android:visibility="visible"
+                    android:contentDescription="@string/todo" />
 
                 <ProgressBar
                     android:id="@+id/upload_progress"
