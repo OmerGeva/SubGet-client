@@ -42,6 +42,14 @@ class Repository @Inject constructor(
         { localDataSource.localInsertSingleListing(listing) }
     )
 
+    // Get all Listings from Listing table
+    fun repoOfflineGetListings() : LiveData<List<Listing>> =
+        localDataSource.localGetAllListings()
+
+    // Get a single Listing from Listing table
+    fun repoOfflineGetSingleListing(id: Int) : LiveData<Listing> =
+        localDataSource.localGetSingleListing(id)
+
 
 
     // Repository operations on Favorites
@@ -68,6 +76,10 @@ class Repository @Inject constructor(
         {remoteDataSource.remoteGetStats()},
         {localDataSource.localInsertStats(it)}
     )
+
+    // Get all stats from Stats table
+    fun repoOfflineGetStats() =
+        localDataSource.localGetStats()
 
 
     // Repository operation on more than one table

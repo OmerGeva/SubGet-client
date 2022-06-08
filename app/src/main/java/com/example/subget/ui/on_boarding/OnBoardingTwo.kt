@@ -22,17 +22,14 @@ class OnBoardingTwo : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         _binding = FragmentOnBoardingTwoBinding.inflate(inflater, container, false)
-
-
 
 
         binding.finish.setOnClickListener {
             findNavController().navigate(R.id.action_viewPagerFragment_to_navigation_home)
             onBoardingFinished()
         }
-
 
         return binding.root
     }

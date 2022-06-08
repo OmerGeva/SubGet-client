@@ -12,10 +12,11 @@ class FavoritesViewModel @Inject constructor(
     repository: Repository
 ) : ViewModel() {
 
-    // All Favorite Listings
+    // Get all Favorite Listings
     val favorites  = repository.repoGetFavorites()
 
     // Populate RecyclerView with search results
     private val repo = repository
-    fun viewModelGetFavoritesSearchResults(location: String) : LiveData<List<Listing>> = repo.repoGetFavoritesSearchResults(location)
+    fun viewModelGetFavoritesSearchResults(location: String) : LiveData<List<Listing>> =
+        repo.repoGetFavoritesSearchResults(location)
 }

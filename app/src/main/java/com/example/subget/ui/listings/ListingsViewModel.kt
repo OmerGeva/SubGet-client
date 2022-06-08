@@ -12,11 +12,13 @@ class ListingsViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    // All listings
-    val listings  = repository.repoGetListings()
+    // Get all Listings from local and remote databases
+    val listings = repository.repoGetListings()
+
+    // Get all Listings from local database
+    val offlineListings = repository.repoOfflineGetListings()
 
     // Populate RecyclerView with search results
-    fun viewModelGetSearchResults(location: String) : LiveData<List<Listing>> = repository.repoGetSearchResults(location)
-
-
+    fun viewModelGetSearchResults(location: String) : LiveData<List<Listing>> =
+        repository.repoGetSearchResults(location)
 }

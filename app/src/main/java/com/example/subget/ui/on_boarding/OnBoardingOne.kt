@@ -22,17 +22,12 @@ class OnBoardingOne : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         _binding = FragmentOnBoardingOneBinding.inflate(inflater, container, false)
 
 
         val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
-
-        binding.next.setOnClickListener {
-            viewPager?.currentItem = 1
-
-        }
-
+        binding.next.setOnClickListener { viewPager?.currentItem = 1 }
 
         return binding.root
     }

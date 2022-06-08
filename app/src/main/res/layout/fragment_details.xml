@@ -46,24 +46,17 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_marginTop="270dp"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:orientation="vertical">
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:orientation="vertical">
-
-
                 <TextView
                     android:id="@+id/detailedTitle"
                     android:layout_width="match_parent"
@@ -84,7 +77,6 @@
                         android:orientation="vertical"
                         android:paddingEnd="10dp"
                         android:layout_weight="1.5">
-
                         <TextView
                             android:id="@+id/detailedAddress"
                             android:layout_width="match_parent"
@@ -98,13 +90,23 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_weight="2">
-
-                        <ImageButton
-                            android:id="@+id/mapicon"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:src="@drawable/mapsicon3"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/find_on_map"
+                                android:textStyle="bold"
+                                android:textSize="15dp"/>
+                            <ImageButton
+                                android:id="@+id/mapicon"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/white"
+                                android:src="@drawable/mapsicon3"/>
+                        </LinearLayout>
 
                     </LinearLayout>
                     <LinearLayout
@@ -122,8 +124,6 @@
                             android:textSize="30sp"
                             android:textColor="@color/black"/>
                     </LinearLayout>
-
-
                 </LinearLayout>
             </LinearLayout>
             <View
@@ -138,7 +138,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -146,14 +145,12 @@
                         android:paddingBottom="8dp"
                         android:paddingTop="8dp"
                         android:orientation="horizontal">
-
                         <ImageView
                             android:id="@+id/bedIcon"
                             android:layout_width="45dp"
                             android:layout_height="50dp"
                             android:padding="4dp"
                             android:src="@drawable/bed" />
-
                         <TextView
                             android:id="@+id/detailedNumOfRooms"
                             android:layout_width="wrap_content"
@@ -162,11 +159,7 @@
                             android:text="Rooms Number"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
-
-
-
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -238,18 +231,6 @@
                                 android:layout_height="45dp"
                                 android:id="@+id/icon4"/>
                         </LinearLayout>
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_gravity="right"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:orientation="vertical"-->
-<!--                            >-->
-<!--                            <ImageView-->
-<!--                                android:layout_width="50dp"-->
-<!--                                android:layout_height="50dp"-->
-<!--                                android:id="@+id/icon5"/>-->
-<!--                        </LinearLayout>-->
-
 
                     </LinearLayout>
 
@@ -310,7 +291,6 @@
                         android:src="@drawable/phone"
                         android:layout_height="50dp"
                         android:id="@+id/phone"/>
-
                     <TextView
                         android:id="@+id/detailedPhone"
                         android:layout_width="match_parent"
@@ -320,14 +300,7 @@
                         android:textColor="@color/black"
                         android:textSize="18dp" />
                 </LinearLayout>
-
-
-
             </LinearLayout>
-
-
         </LinearLayout>
-
     </ScrollView>
-
 </FrameLayout>

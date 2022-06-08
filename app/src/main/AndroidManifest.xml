@@ -16,7 +16,7 @@
             android:value="AIzaSyBEbOefFOfeWT-mh6rDw5tfZAMMnMxriV4"
             />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.on_boarding.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

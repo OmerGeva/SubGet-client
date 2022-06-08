@@ -1,15 +1,9 @@
-package com.example.subget.ui
+package com.example.subget.ui.on_boarding
 
-
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import com.example.subget.databinding.ActivityMainBinding
 import androidx.navigation.ui.setupWithNavController
 import com.example.subget.R
@@ -28,29 +22,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment)
 
         navView.setupWithNavController(navController)
 
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
-                R.id.navigation_home -> showBottomNav()
-                R.id.navigation_details -> hideBottomNav()
-                R.id.navigation_listings -> showBottomNav()
-                R.id.navigation_favorites -> showBottomNav()
-                R.id.navigation_addListing -> showBottomNav()
+                R.id.navigation_home -> binding.navView.visibility = View.VISIBLE
+                R.id.navigation_details -> binding.navView.visibility = View.GONE
+                R.id.navigation_listings -> binding.navView.visibility = View.VISIBLE
+                R.id.navigation_favorites -> binding.navView.visibility = View.VISIBLE
+                R.id.navigation_addListing -> binding.navView.visibility = View.VISIBLE
             }
         }
     }
-
-    // Hide the NavBar for fragments who don't use it
-    private fun hideBottomNav() {
-        binding.navView.visibility = View.GONE
-    }
-    private fun showBottomNav() {
-        binding.navView.visibility = View.VISIBLE
-    }
-
 }

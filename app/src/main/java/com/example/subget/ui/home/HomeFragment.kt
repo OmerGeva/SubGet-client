@@ -44,23 +44,20 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         disableBackButton()
-        fetchData()
+        getOnlineStats()
 
     }
 
-    private fun fetchData() {
+    private fun getOnlineStats() {
         viewModel.stats.observe(viewLifecycleOwner) {
             when (it.status) {
-                is Loading -> {
-                    binding.loadingScreen.visibility = View.VISIBLE
-                }
+                is Loading -> { binding.loadingScreen.visibility = View.VISIBLE }
 
                 is Success -> {
                     binding.loadingScreen.visibility = View.GONE
-
                     if (it.status.data != null) {
                         binding.LL.visibility = View.VISIBLE
-                        setStats(it.status.data!!)
+                        setStats(it.status.data)
                     }
                 }
 
@@ -81,6 +78,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun getOfflineStats() {
+        viewModel.offlineStats.observe(viewLifecycleOwner) { setStats(it) }
     }
 
     private fun dialog(message: String) {
@@ -108,18 +109,7 @@ class HomeFragment : Fragment() {
     private fun disableBackButton() {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(
             true // default to enabled
-        ) {
-            override fun handleOnBackPressed() {
-
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,  // LifecycleOwner
-            callback
-        )
-
+        ) { override fun handleOnBackPressed() {} }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
-
-
-
 }
