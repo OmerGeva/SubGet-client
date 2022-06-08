@@ -41,11 +41,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         disableBackButton()
-        fetchData()
+        getOnlineStats()
 
     }
 
-    private fun fetchData() {
+    private fun getOnlineStats() {
         viewModel.stats.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> { binding.loadingScreen.visibility = View.VISIBLE }
@@ -63,6 +63,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun getOfflineStats() {
+        viewModel.offlineStats.observe(viewLifecycleOwner) { setStats(it) }
     }
 
     private fun dialog(message: String) {

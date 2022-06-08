@@ -44,8 +44,13 @@ class ListingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        createRecyclerView()
+        binding.listingRecycler.layoutManager = LinearLayoutManager(requireContext())
+        adapter = ListingAdapter(this@ListingsFragment)
+        binding.listingRecycler.adapter = adapter
+
+        // if offline
         getSearchResults()
+        getOnlineListings()
 
     }
 
@@ -70,11 +75,8 @@ class ListingsFragment : Fragment() {
             adapter.setListings(it)}
     }
 
-    private fun createRecyclerView() {
-        binding.listingRecycler.layoutManager = LinearLayoutManager(requireContext())
-        adapter = ListingAdapter(this@ListingsFragment)
-        binding.listingRecycler.adapter = adapter
 
+    private fun getOnlineListings() {
         viewModel.listings.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> { binding.loadingScreen.visibility = View.VISIBLE }
@@ -91,6 +93,10 @@ class ListingsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun getOfflineListings() {
+        viewModel.offlineListings.observe(viewLifecycleOwner) { adapter.setListings(it) }
     }
 
     private fun dialog(message: String) {

@@ -43,10 +43,16 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         arguments?.getInt("id")?.let { viewModel.setId(it) }
 
-        binding.detailedPhone.setOnClickListener { call() }
+        // check if offline or not
         binding.mapicon.setOnClickListener { setCoordinates() }
+        getListing()
+
+
+        binding.detailedPhone.setOnClickListener { call() }
         binding.heartIcon.setOnClickListener {
 
             if (binding.heartIcon.isSelected) {
@@ -56,7 +62,7 @@ class DetailsFragment : Fragment() {
             }
             binding.heartIcon.isSelected = !binding.heartIcon.isSelected
         }
-        getListing()
+
     }
 
     private fun getListing() {

@@ -29,11 +29,17 @@ private val repository: Repository
     }
     val favorite : LiveData<Boolean> = _favorite
 
-    // Get a specific Listing from Listing table
+    // Get a specific Listing from local and remote databases
     private val _listing = _id.switchMap {
         repository.repoGetSingleListing(it)
     }
     val listing : LiveData<Resource<Listing>> = _listing
+
+    // Get a specific Listing from local database
+    private val _offlineListing = _id.switchMap {
+        repository.repoOfflineGetSingleListing(it)
+    }
+    val offlineListing = _offlineListing
 
     // Updates (ADD / REMOVE) Listings favorite status in Favorite table
     fun viewModelDeleteFavorite() = viewModelScope.launch { async(IO) {
