@@ -35,20 +35,32 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:layout_marginTop="10dp"
         android:textSize="38dp"
-        android:text="Hello!" />
+        android:text="@string/hello" />
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="180dp"
+            android:src="@drawable/subget_logo" />
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textSize="18dp"
-        android:text="Welcome to Subget! We help you find your dream sublet." />
+        android:text="@string/welcome" />
 
     <TextView
         android:layout_width="match_parent"
@@ -56,7 +68,7 @@
         android:paddingTop="40dp"
         android:textSize="18dp"
         android:paddingLeft="16dp"
-        android:text="You're in good company... " />
+        android:text="@string/good_company" />
 
     <LinearLayout
         android:id="@+id/LL"
@@ -79,12 +91,12 @@
             android:layout_width="wrap_content"
             android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:text="Most expensive listing" />
+            android:text="@string/most_expensive_listing" />
         <TextView
             android:id="@+id/most_expensive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1" />
+            android:text="" />
         </LinearLayout>
 
 
@@ -99,13 +111,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Least expensive listing" />
+            android:text="@string/least_expensive_listing" />
         <TextView
                 android:id="@+id/least_expensive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text="2" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -120,12 +131,12 @@
             android:layout_width="wrap_content"
             android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:text="# of listings" />
+            android:text="@string/number_of_listings" />
         <TextView
             android:id="@+id/count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3" />
+            android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -139,12 +150,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Most Expensive Price" />
+            android:text="@string/most_expensive_price" />
         <TextView
             android:id="@+id/max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5" />
+            android:text="" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -158,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Least Expensive Price" />
+            android:text="@string/least_expensive_price" />
         <TextView
             android:id="@+id/min"
             android:layout_width="wrap_content"
@@ -178,12 +189,13 @@
             android:layout_width="wrap_content"
             android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:text="Average Price" />
-        <TextView
+            android:text="@string/avg_price" />
+
+            <TextView
             android:id="@+id/avg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BLA" />
+            android:text="" />
         </LinearLayout>
 
 

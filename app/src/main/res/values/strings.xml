@@ -3,11 +3,61 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    // Navigation labels
+<!--  Navigation labels-->
     <string name="title_home">Home</string>
     <string name="title_details">Details</string>
     <string name="title_listings">Listings</string>
     <string name="title_favorites">Favorites</string>
     <string name="find_on_map">Find on map</string>
+
+
+<!-- Homepage text   -->
+    <string name="hello">Hello!</string>
+    <string name="welcome">Welcome to Subget! We help you find your dream sublet.</string>
+    <string name="good_company">You\'re in good company… </string>
+    <string name="most_expensive_listing">Most expensive listing</string>
+    <string name="least_expensive_listing">Least expensive listing</string>
+    <string name="number_of_listings"># of listings</string>
+    <string name="most_expensive_price">Most expensive price</string>
+    <string name="least_expensive_price">Least expensive price</string>
+    <string name="avg_price">Average price</string>
+
+    <string name="search_by_location">Search by Location</string>
+
+
+<!-- Upload listing-->
+    <string name="upload_add_listing">Add a Listing</string>
+    <string name="upload_info">General Information</string>
+    <string name="upload_title">*Title</string>
+    <string name="upload_description">*Description</string>
+    <string name="upload_address">*Address</string>
+    <string name="upload_floor">*Floor</string>
+    <string name="upload_bedrooms">*Bedrooms</string>
+    <string name="upload_bathrooms">*Bathrooms</string>
+    <string name="upload_price">*Price in $</string>
+    <string name="upload_pets">Pets Allowed</string>
+    <string name="upload_washing_machine">Washing Machine</string>
+    <string name="upload_wifi">WiFi</string>
+    <string name="upload_near_beach">Near the Beach</string>
+    <string name="upload_contact_info">Contact Information</string>
+    <string name="upload_full_name">*Full Name</string>
+    <string name="upload_phone_number">*Phone Number</string>
+    <string name="upload_submit">SUBMIT</string>
+    <string name="upload_notice">Please fill in all fields with a *</string>
+
+
+<!--  Onboarding Second-->
+    <string name="first_onboard_first">Welcome to Subget!</string>
+    <string name="first_onboard_second">Looking for a home?</string>
+    <string name="first_onboard_third">You came to the right place!</string>
+    <string name="first_onboard_fourth">Explore dozens of listings with SubGet!</string>
+    <string name="first_onboard_fifth">NEXT</string>
+<!--  Onboarding Second-->
+    <string name="onboard_first">Own an apartment?</string>
+    <string name="onboard_second">Looking to lease it?"</string>
+    <string name="onboard_third">Upload your listing to SubGet and get great exposure!</string>
+    <string name="onboard_fourth">FINISH</string>
+
+
 
 </resources>

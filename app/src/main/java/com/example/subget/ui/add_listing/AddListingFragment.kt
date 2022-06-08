@@ -1,12 +1,19 @@
 package com.example.subget.ui.add_listing
 
 import android.app.AlertDialog
+import android.content.Context
+import android.content.Context.CONNECTIVITY_SERVICE
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +26,7 @@ import com.example.subget.utils.Loading
 import com.example.subget.utils.Success
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Error
+import java.lang.Thread.sleep
 
 @AndroidEntryPoint
 class AddListingFragment : Fragment() {
@@ -37,10 +45,13 @@ class AddListingFragment : Fragment() {
         _binding = FragmentAddListingBinding.inflate(inflater, container, false)
 
         binding.submitButton.setOnClickListener {
+            binding.submitButton.isClickable = false
             if (validateInput()) {
                 sendListing(); receiveListing()
+                binding.submitButton.postDelayed({binding.submitButton.isClickable = true},2000)
             }
         }
+
 
         return binding.root
     }
@@ -87,10 +98,20 @@ class AddListingFragment : Fragment() {
                 is Loading -> {
                     binding.logo.visibility = View.GONE
                     binding.uploadProgress.visibility = View.VISIBLE
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        val ConnectionManager = getSystemService(requireContext(),ConnectivityManager::class.java) as ConnectivityManager
+
+                        val networkInfo = ConnectionManager.activeNetworkInfo
+                        if (networkInfo == null || !networkInfo.isConnected) {
+                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_LONG).show()
+                        }
+                    },3500)
+
                 }
             }
         }
     }
+
 
     private fun dialog(message: String, id: Int) {
         val dialog = AlertDialog.Builder(requireContext())
@@ -101,11 +122,13 @@ class AddListingFragment : Fragment() {
                     bundleOf("id" to id))
 
             }
+
         }
         dialog.setNegativeButton("NOT OK") { dialog, _ ->
             dialog.cancel()
         }
         dialog.create().show()
+
     }
 
     private fun clearSelection() {

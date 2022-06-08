@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.example.subget.R
 import com.example.subget.databinding.FragmentListingsBinding
 import com.example.subget.databinding.FragmentOnBoardingOneBinding
@@ -23,6 +24,7 @@ class OnBoardingOne : Fragment() {
     ): View? {
 
         _binding = FragmentOnBoardingOneBinding.inflate(inflater, container, false)
+
 
         val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
         binding.next.setOnClickListener { viewPager?.currentItem = 1 }

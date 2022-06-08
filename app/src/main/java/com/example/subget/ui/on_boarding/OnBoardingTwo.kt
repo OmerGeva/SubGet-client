@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.example.subget.R
 import com.example.subget.databinding.FragmentOnBoardingOneBinding
 import com.example.subget.databinding.FragmentOnBoardingTwoBinding
@@ -23,6 +24,7 @@ class OnBoardingTwo : Fragment() {
     ): View? {
 
         _binding = FragmentOnBoardingTwoBinding.inflate(inflater, container, false)
+
 
         binding.finish.setOnClickListener {
             findNavController().navigate(R.id.action_viewPagerFragment_to_navigation_home)
