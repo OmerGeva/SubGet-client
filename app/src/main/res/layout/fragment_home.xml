@@ -71,7 +71,7 @@
         android:text="@string/good_company" />
 
     <LinearLayout
-        android:id="@+id/LL"
+        android:id="@+id/data_display"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
