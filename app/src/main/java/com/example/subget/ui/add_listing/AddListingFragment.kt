@@ -48,6 +48,7 @@ class AddListingFragment : Fragment() {
         val hasConnection = requireActivity().internetEnabled()
 
 
+        // Creates a new Listing and redirects to DetailListing fragment
         binding.submitButton.setOnClickListener {
             if (hasConnection) {
                 binding.submitButton.isClickable = false
@@ -59,6 +60,7 @@ class AddListingFragment : Fragment() {
         }
     }
 
+    // Upload the Listing to online API
     private fun sendListing() {
         viewModel.setListing(
             Listing(
@@ -80,6 +82,7 @@ class AddListingFragment : Fragment() {
         )
     }
 
+    // If upload was successful, redirects to DetailListing fragment
     private fun receiveListing() {
         viewModel.newListing.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -107,6 +110,7 @@ class AddListingFragment : Fragment() {
         }
     }
 
+    // Displays a Dialog and redirect to DetailListing fragment
     private fun dialogRedirect(message: String, id: Int) {
         val dialog = AlertDialog.Builder(requireContext())
         dialog.setMessage(message)
@@ -118,6 +122,7 @@ class AddListingFragment : Fragment() {
         dialog.create().show()
     }
 
+    // Clears user input
     private fun clearSelection() {
         binding.title.text.clear()
         binding.description.text.clear()
@@ -134,6 +139,7 @@ class AddListingFragment : Fragment() {
         binding.washingMachine.isChecked = false
     }
 
+    // Checks whether user has fill all required fields
     private fun validateInput(): Boolean {
 
         var inputApproved = true
@@ -173,6 +179,7 @@ class AddListingFragment : Fragment() {
         return inputApproved
     }
 
+    // Disable back button to increase intended usage of navigation bar
     private fun disableBackButton() {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(
             true // default to enabled

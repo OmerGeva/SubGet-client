@@ -25,7 +25,6 @@ class OnBoardingTwo : Fragment() {
 
         _binding = FragmentOnBoardingTwoBinding.inflate(inflater, container, false)
 
-
         binding.finish.setOnClickListener {
             findNavController().navigate(R.id.action_viewPagerFragment_to_navigation_home)
             onBoardingFinished()
@@ -34,6 +33,7 @@ class OnBoardingTwo : Fragment() {
         return binding.root
     }
 
+    // Keeps track of whether the On Boarding feature was presented to the user
     private fun onBoardingFinished() {
         val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         val editor = sharedPref.edit()

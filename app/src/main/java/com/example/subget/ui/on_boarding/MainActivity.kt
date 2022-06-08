@@ -22,11 +22,13 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        // Bottom navigation bar
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment)
 
         navView.setupWithNavController(navController)
 
+        // Hides navigation bar on fragments that don't need access to it
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
                 R.id.navigation_home -> binding.navView.visibility = View.VISIBLE

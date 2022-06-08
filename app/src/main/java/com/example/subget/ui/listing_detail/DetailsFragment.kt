@@ -41,22 +41,26 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Checks whether user has internet connection
         val hasConnection = requireActivity().internetEnabled()
 
-        arguments?.getInt("id")?.let {
-            Log.d("OFFLINE TEST", it.toString())
-            viewModel.setId(it) }
+        // Set id of listing we want to display
+        arguments?.getInt("id")?.let { viewModel.setId(it) }
 
-
+        // Redirects to Map fragment
         binding.mapicon.setOnClickListener {
             if (hasConnection) { setCoordinates() }
             else { requireActivity().dialog(getString(R.string.internet_connection)) }
         }
 
+        // Populates page according to Online/Offline mode
         if (hasConnection) { getOnlineListing() }
         else { getOfflineListing() }
 
+        // Redirects user to phone application when click on the number
         binding.detailedPhone.setOnClickListener { call() }
+
+        // Set Favorite status of this specific Listing
         binding.heartIcon.setOnClickListener {
 
             if (binding.heartIcon.isSelected) {
@@ -68,6 +72,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    // Populates page with data from local and remote databases
     private fun getOnlineListing() {
         viewModel.listing.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -90,6 +95,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    // Populates page with data from local database
     private fun getOfflineListing() {
         viewModel.offlineListing.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -103,6 +109,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    // Displays Listing values on page
     private fun setListing(listing: Listing) {
         viewModel.favorite.observe(viewLifecycleOwner) { binding.heartIcon.isSelected = it }
         binding.detailedTitle.text = listing.title
@@ -113,32 +120,6 @@ class DetailsFragment : Fragment() {
         binding.detailedContactName.text = listing.contact_name
         binding.detailedPrice.text = getString(R.string.dollar) + listing.price.toString()
 
-        Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
-        setIcons(listing)
-    }
-
-    private fun setCoordinates() {
-        var sendLat: Double? = null; var sendLng: Double? = null
-        try {
-            val geocode = Geocoder(context, Locale.getDefault())
-            val addList = geocode.getFromLocationName(binding.detailedAddress.text.toString(),1)
-            sendLat = addList[0].latitude
-            sendLng = addList[0].longitude
-
-        }catch (e: Exception){
-            Toast.makeText(context, getString(R.string.error_map), LENGTH_SHORT).show()
-        }
-
-        if((sendLng != null) && (sendLat != null)) {
-            findNavController().navigate(R.id.action_navigation_details_to_mapFragment,
-                bundleOf("lat" to sendLat,
-                    "lng" to sendLng,
-                    "title" to binding.detailedTitle.text,
-                    "address" to binding.detailedAddress.text))
-        }
-    }
-
-    private fun setIcons(listing: Listing) {
         if(listing.washing_machine) {
             binding.icon1.setImageResource(R.drawable.washing_machine)
         }
@@ -151,8 +132,34 @@ class DetailsFragment : Fragment() {
         if(listing.near_beach) {
             binding.icon4.setImageResource(R.drawable.beach)
         }
+
+        Glide.with(requireContext()).load(listing.image).into(binding.detailedImage)
     }
 
+    // Finds address coordinates to display on Map Fragment
+    private fun setCoordinates() {
+        var sendLat: Double? = null; var sendLng: Double? = null
+        try {
+            val geocode = Geocoder(context, Locale.getDefault())
+            val addList = geocode.getFromLocationName(binding.detailedAddress.text.toString(),1)
+            sendLat = addList[0].latitude
+            sendLng = addList[0].longitude
+
+        }catch (e: Exception){
+            Toast.makeText(context, getString(R.string.error_map), LENGTH_SHORT).show()
+        }
+
+        // Redirect to Map Fragment
+        if((sendLng != null) && (sendLat != null)) {
+            findNavController().navigate(R.id.action_navigation_details_to_mapFragment,
+                bundleOf("lat" to sendLat,
+                    "lng" to sendLng,
+                    "title" to binding.detailedTitle.text,
+                    "address" to binding.detailedAddress.text))
+        }
+    }
+
+    // Redirects user to phone application when click on the number
     private fun call() {
         val phoneNumber = binding.detailedPhone.text.toString()
         val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null))

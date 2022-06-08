@@ -25,7 +25,6 @@ class OnBoardingOne : Fragment() {
 
         _binding = FragmentOnBoardingOneBinding.inflate(inflater, container, false)
 
-
         val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
         binding.next.setOnClickListener { viewPager?.currentItem = 1 }
 

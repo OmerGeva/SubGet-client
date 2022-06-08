@@ -30,8 +30,11 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+
+        // Shows Search window
         activity?.setActionBar(activity?.findViewById(R.id.toolbar))
-        binding.toolbarSearch.toolbar.visibility = View.VISIBLE
+
+        // Disable back button to increase intended usage of navigation bar
         disableBackButton()
 
         return binding.root
@@ -39,10 +42,15 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Populates RecyclerView according data from local database
         createRecyclerView()
+
+        // Search window feature
         getSearchResults()
     }
 
+    // Retrieves user input query
     private fun getSearchResults() {
         binding.toolbarSearch.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
@@ -57,12 +65,14 @@ class FavoritesFragment : Fragment() {
         })
     }
 
+    // Retrieves all Listings from local database that match the query
     private fun getItemsFromDb(searchText: String) {
         var searchText = "%$searchText%"
         viewModel.viewModelGetFavoritesSearchResults(location = searchText)
             .observe(viewLifecycleOwner) { adapter.setFavorites(it)}
     }
 
+    // Populates RecyclerView according data from local database
     private fun createRecyclerView() {
         adapter = FavoritesAdapter(this)
         binding.favoritesRecycler.adapter = adapter
@@ -70,12 +80,14 @@ class FavoritesFragment : Fragment() {
         viewModel.favorites.observe(viewLifecycleOwner) { adapter.setFavorites(it) }
     }
 
+    // Redirects to DetailedListing page by clicking on a specific Listing
     fun onListingClick(listingID : Int) {
         findNavController().navigate(R.id.action_favorites_to_detailedListing,
             bundleOf("id" to listingID)
         )
     }
 
+    // Disable back button to increase intended usage of navigation bar
     private fun disableBackButton() {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(
             true // default to enabled

@@ -19,6 +19,7 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        // Display Application logo for 3 seconds before re starting
         Handler().postDelayed({
             if (onBoardingFinished()) {
                 findNavController().navigate(R.id.action_navigation_splash_to_navigation_home)
@@ -29,6 +30,7 @@ class SplashFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
+    // Keeps track of whether the On Boarding feature was presented to the user
     private fun onBoardingFinished(): Boolean {
         val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         return sharedPref.getBoolean("Finished", false)

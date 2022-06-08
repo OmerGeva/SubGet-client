@@ -26,6 +26,15 @@ class MapFragment : Fragment() {
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
 
+        // Displays the map
+        createMap()
+
+
+        return binding.root
+    }
+
+    // Displays the map
+    private fun createMap() {
         val mapSupport = childFragmentManager.findFragmentById(R.id.myMap) as SupportMapFragment
         mapSupport.getMapAsync { mMap ->
             mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
@@ -46,6 +55,5 @@ class MapFragment : Fragment() {
                 mMap.addMarker(MarkerOptions().position(LatLng(lat, lng)).title(title))
             }
         }
-        return binding.root
     }
 }

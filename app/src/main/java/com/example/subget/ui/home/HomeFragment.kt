@@ -33,6 +33,8 @@ class HomeFragment : Fragment() {
     ): View? {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        // Disable back button to increase intended usage of navigation bar
         disableBackButton()
 
         return binding.root
@@ -41,13 +43,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Checks whether user has internet connection
         val hasConnection = requireActivity().internetEnabled()
 
+        // Populates page with data according to Online/Offline mode
         if (hasConnection) { getOnlineStats() }
         else { getOfflineStats() }
 
     }
-
+    // Populates page with data from local and remote databases
     private fun getOnlineStats() {
         viewModel.stats.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -69,6 +73,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Populates page with data from local database
     private fun getOfflineStats() {
         viewModel.offlineStats.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -82,18 +87,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun dialog(message: String) {
-        val dialog = AlertDialog.Builder(requireContext())
-        dialog.setMessage(message)
-        dialog.setPositiveButton("OK") { _, _ ->
-            // Do something
-        }
-        dialog.setNegativeButton("NOT OK") { dialog, _ ->
-            dialog.cancel()
-        }
-        dialog.create().show()
-    }
-
+    // Displays Stat values on page
     private fun setStats(stats: Stats) {
         binding.avg.text = "$" + stats.listings_price_avg.toString()
         binding.max.text = "$" + stats.listings_price_max.toString()
@@ -103,6 +97,7 @@ class HomeFragment : Fragment() {
         binding.count.text = stats.listings_count.toString()
     }
 
+    // Disable back button to increase intended usage of navigation bar
     private fun disableBackButton() {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(
             true // default to enabled

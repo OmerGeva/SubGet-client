@@ -35,7 +35,11 @@ class ListingsFragment : Fragment() {
     ): View? {
 
         _binding = FragmentListingsBinding.inflate(inflater, container, false)
+
+        // Shows Search window
         activity?.setActionBar(activity?.findViewById(R.id.toolbar))
+
+        // Disable back button to increase intended usage of navigation bar
         disableBackButton()
 
         return binding.root
@@ -44,20 +48,25 @@ class ListingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set up RecyclerView
         binding.listingRecycler.layoutManager = LinearLayoutManager(requireContext())
         adapter = ListingAdapter(this@ListingsFragment)
         binding.listingRecycler.adapter = adapter
 
+        // Checks whether user has internet connection
         val hasConnection = requireActivity().internetEnabled()
 
+        // Populates RecyclerView according to Online/Offline mode
         if (hasConnection) { getOnlineListings() }
         else { getOfflineListings() }
 
+        // Search window feature
         getSearchResults()
 
 
     }
 
+    // Retrieves user input query
     private fun getSearchResults() {
         binding.toolbarSearch.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
@@ -73,13 +82,14 @@ class ListingsFragment : Fragment() {
         })
     }
 
+    // Retrieves all Listings from local database that match the query
     private fun getSearchResults(searchText: String) {
         var searchText = "%$searchText%"
         viewModel.viewModelGetSearchResults(location = searchText).observe(viewLifecycleOwner) {
             adapter.setListings(it)}
     }
 
-
+    // Populates RecyclerView with data from local and remote databases
     private fun getOnlineListings() {
         viewModel.listings.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -101,6 +111,7 @@ class ListingsFragment : Fragment() {
         }
     }
 
+    // Populates RecyclerView with data from local database
     private fun getOfflineListings() {
         viewModel.offlineListings.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
@@ -117,11 +128,13 @@ class ListingsFragment : Fragment() {
         }
     }
 
+    // Redirects to DetailedListing page by clicking on a specific Listing
     fun onItemClicked(listingID : Int) {
         findNavController().navigate(R.id.action_allListings_to_detailedListing,
             bundleOf("id" to listingID))
     }
 
+    // Disable back button to increase intended usage of navigation bar
     private fun disableBackButton() {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(
             true // default to enabled
