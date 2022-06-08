@@ -34,6 +34,7 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         disableBackButton()
+
         return binding.root
     }
 
@@ -100,7 +101,6 @@ class HomeFragment : Fragment() {
         binding.mostExpensive.text = stats.most_expensive_address
         binding.leastExpensive.text = stats.least_expensive_address
         binding.count.text = stats.listings_count.toString()
-
     }
 
     private fun disableBackButton() {

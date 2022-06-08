@@ -3,6 +3,7 @@ package com.example.subget.ui.on_boarding
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
 import com.example.subget.databinding.ActivityMainBinding
 import androidx.navigation.ui.setupWithNavController

@@ -1,8 +1,10 @@
 package com.example.subget.utils
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import com.example.subget.R
 
@@ -21,3 +23,4 @@ fun Context.dialog(message: String) {
     dialog.setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.cancel() }
     dialog.create().show()
 }
+

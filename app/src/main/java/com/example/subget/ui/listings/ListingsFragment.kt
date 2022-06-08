@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -35,6 +36,7 @@ class ListingsFragment : Fragment() {
 
         _binding = FragmentListingsBinding.inflate(inflater, container, false)
         activity?.setActionBar(activity?.findViewById(R.id.toolbar))
+        disableBackButton()
 
         return binding.root
     }
@@ -118,5 +120,12 @@ class ListingsFragment : Fragment() {
     fun onItemClicked(listingID : Int) {
         findNavController().navigate(R.id.action_allListings_to_detailedListing,
             bundleOf("id" to listingID))
+    }
+
+    private fun disableBackButton() {
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true // default to enabled
+        ) { override fun handleOnBackPressed() {} }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 }

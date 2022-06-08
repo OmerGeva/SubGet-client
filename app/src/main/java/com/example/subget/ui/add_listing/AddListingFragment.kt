@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -36,6 +37,7 @@ class AddListingFragment : Fragment() {
     ): View? {
 
         _binding = FragmentAddListingBinding.inflate(inflater, container, false)
+        disableBackButton()
 
         return binding.root
     }
@@ -51,7 +53,7 @@ class AddListingFragment : Fragment() {
                 binding.submitButton.isClickable = false
                 if (validateInput()) {
                     sendListing(); receiveListing()
-                    binding.submitButton.postDelayed({binding.submitButton.isClickable = true},2000)
+//                    binding.submitButton.postDelayed({binding.submitButton.isClickable = true},2000)
                 }
             } else { requireActivity().dialog(getString(R.string.internet_connection)) }
         }
@@ -110,6 +112,7 @@ class AddListingFragment : Fragment() {
         dialog.setMessage(message)
         dialog.setPositiveButton(getString(R.string.ok)) { dialog, _ ->
             findNavController().navigate(R.id.action_addListings_to_detailedListing, bundleOf("id" to id))
+            binding.submitButton.isClickable = true
             dialog.cancel()
         }
         dialog.create().show()
@@ -167,7 +170,13 @@ class AddListingFragment : Fragment() {
             binding.phoneNumber.error = getString(R.string.fill_phone)
             inputApproved = false
         }
-
         return inputApproved
+    }
+
+    private fun disableBackButton() {
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true // default to enabled
+        ) { override fun handleOnBackPressed() {} }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 }
