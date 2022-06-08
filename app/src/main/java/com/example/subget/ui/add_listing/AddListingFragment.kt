@@ -48,17 +48,13 @@ class AddListingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Checks whether user has internet connection
         val hasConnection = requireActivity().internetEnabled()
-
 
         // Creates a new Listing and redirects to DetailListing fragment
         binding.submitButton.setOnClickListener {
             if (hasConnection) {
-                binding.submitButton.isClickable = false
-                if (validateInput()) {
-                    sendListing(); receiveListing()
-                    binding.submitButton.postDelayed({binding.submitButton.isClickable = true},3000)
-                } else { binding.submitButton.isClickable = true }
+                if (validateInput()) { sendListing(); receiveListing() }
             } else { requireActivity().dialog(getString(R.string.internet_connection)) }
         }
     }
@@ -96,8 +92,8 @@ class AddListingFragment : Fragment() {
 
                 is Success -> {
                     if (it.status.data != null) {
-                        binding.submitButton.isClickable = true
-                        dialogRedirect(getString(R.string.success), it.status.data.id)
+                        findNavController().navigate(R.id.action_addListings_to_detailedListing, bundleOf("id" to it.status.data.id))
+                        Toast.makeText(context, getString(R.string.success), LENGTH_SHORT).show()
                         clearSelection()
                         binding.logo.visibility = View.VISIBLE
                         binding.uploadProgress.visibility = View.GONE
@@ -113,17 +109,6 @@ class AddListingFragment : Fragment() {
                 }
             }
         }
-    }
-
-    // Displays a Dialog and redirect to DetailListing fragment
-    private fun dialogRedirect(message: String, id: Int) {
-        val dialog = AlertDialog.Builder(requireContext())
-        dialog.setMessage(message)
-        dialog.setPositiveButton(getString(R.string.ok)) { dialog, _ ->
-            findNavController().navigate(R.id.action_addListings_to_detailedListing, bundleOf("id" to id))
-            dialog.cancel()
-        }
-        dialog.create().show()
     }
 
     // Clears user input
