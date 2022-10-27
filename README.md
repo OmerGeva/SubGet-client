@@ -1,4 +1,5 @@
-<img src="https://ibb.co/Y32gwL0" width="450">
+<img width="450" alt="subget_logo" src="https://user-images.githubusercontent.com/89524327/198267506-a419465e-a562-4aa7-9df0-b81bb9878905.png">
+
 
 # SubGet
 
@@ -11,7 +12,7 @@ Subget is an Android application that operates an online marketplace for lodging
 
 # The Team 
 
-<img src="https://ibb.co/qMM24q4" width="650">
+![54701359](https://user-images.githubusercontent.com/89524327/198267550-161e1b80-3f37-43b1-bd7e-ce5ab0449af5.jpg)
 
 [Omer Geva](https://github.com/OmerGeva) [Alon Miron](https://github.com/alonmiron) [Daniel Itkes](https://github.com/DanielItkes) 
 
