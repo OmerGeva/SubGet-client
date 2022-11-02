@@ -12,16 +12,12 @@ class AddListingViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    // Create the Listing
-    private val _listing =  MutableLiveData<Listing>()
-    fun setListing(listing: Listing) {
-        _listing.value = listing
-    }
+    // New Listing
+    var newListing : LiveData<Resource<Listing>>? = null
 
-    // Upload Listing and get
-    private val _newListing = _listing.switchMap {
-        repository.repoPostListing(it)
+    // Send POST request with the new Listing
+    fun viewModelPostListing(listing: Listing) {
+        newListing = repository.repoPostListing(listing)
     }
-    val newListing : LiveData<Resource<Listing>> = _newListing
 
 }

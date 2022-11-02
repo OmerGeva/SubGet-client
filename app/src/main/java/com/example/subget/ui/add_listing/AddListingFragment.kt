@@ -61,7 +61,7 @@ class AddListingFragment : Fragment() {
 
     // Upload the Listing to online API
     private fun sendListing() {
-        viewModel.setListing(
+        viewModel.viewModelPostListing(
             Listing(
                 title = binding.title.text.toString(),
                 description = binding.description.text.toString(),
@@ -83,7 +83,7 @@ class AddListingFragment : Fragment() {
 
     // If upload was successful, redirects to DetailListing fragment
     private fun receiveListing() {
-        viewModel.newListing.observe(viewLifecycleOwner) {
+        viewModel.newListing?.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> {
                     binding.logo.visibility = View.GONE
